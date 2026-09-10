@@ -44,7 +44,7 @@ jobs:
       # Without this the plan tests skip rather than fail, and a gate that goes
       # quiet when a dependency is missing is worse than one that goes red.
       - name: Install OpenTofu
-        uses: opentofu/setup-opentofu@592200bd4b9bbf4772ace78f887668b1aee8f716 # v1.0.5
+        uses: opentofu/setup-opentofu@a1320f892987e89d278cc92dc5adc984fb93aca4 # v2.0.2
         with:
           tofu_version: 1.12.6
           # The wrapper captures the engine's output for later steps, and the
@@ -80,7 +80,7 @@ jobs:
       # a new engine is a run whose result is about a different thing than the
       # last one was.
       - name: Install OpenTofu
-        uses: opentofu/setup-opentofu@592200bd4b9bbf4772ace78f887668b1aee8f716 # v1.0.5
+        uses: opentofu/setup-opentofu@a1320f892987e89d278cc92dc5adc984fb93aca4 # v2.0.2
         with:
           tofu_version: 1.12.6
           # The wrapper captures the engine's output for later steps, and the
