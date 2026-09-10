@@ -28,7 +28,7 @@ Reserve space under the line with a `Gtk.TextTag` carrying `pixels-below-lines`,
 
 A `GtkSource.GutterRendererText` marking the line.
 
-This works and it answers a different question. **A gutter cell is as wide as the gutter**, so it can carry a marker, a colour and a character. It cannot carry *"Exposes rds.orders to the internet — 4 hops"*. Keep it for the marker in the margin that says a verdict exists; it is not the verdict.
+This works and it answers a different question. **A gutter cell is as wide as the gutter**, so it can carry a marker, a colour and a character. It can't carry *"Exposes rds.orders to the internet — 4 hops"*. Keep it for the marker in the margin that says a verdict exists; it isn't the verdict.
 
 ## What broke, and what it teaches
 
@@ -36,7 +36,7 @@ This works and it answers a different question. **A gutter cell is as wide as th
 
 The fix is that **the gap and the row are one number**, `VERDICT_HEIGHT`, used for both. Two numbers drift, and when they drift the row lands on a line of the user's code.
 
-Worth carrying into the real editor as a rule: an annotation that reserves space must be sized from the same value that reserves it. And worth carrying into how this project is checked — the assertions were all true and the picture was broken, so **rendering it and looking is not optional**.
+Worth carrying into the real editor as a rule: an annotation that reserves space must be sized from the same value that reserves it. And worth carrying into how this project is checked — the assertions were all true and the picture was broken, so **rendering it and looking isn't optional**.
 
 Four toolkit errors on the way, all of them GTK3 memory. They are in `docs/toolkit-notes.md`.
 
@@ -48,7 +48,7 @@ Four toolkit errors on the way, all of them GTK3 memory. They are in `docs/toolk
 
 This tested **one** annotation on a 38-line file. Neither of the things that could still sink it was measured:
 
-- **Density.** FR-ED-05 implies many verdicts at once. Every overlay is a widget, and repositioning them all on edit or resize is work proportional to their number. Fifty findings on a 5,000-line file against NFR-09's 300ms budget is the test, and it has not been run.
+- **Density.** FR-ED-05 implies many verdicts at once. Every overlay is a widget, and repositioning them all on edit or resize is work proportional to their number. Fifty findings on a 5,000-line file against NFR-09's 300ms budget is the test, and it hasn't been run.
 - **Interaction with plan highlighting.** Plan highlighting wants changed lines styled. Whether `pixels-below-lines` tags and line-background tags compose cleanly, or fight, is unknown.
 
 Both are measurable and both belong in the performance corpus that R-11 says to build in P1 rather than P4. Neither blocks the first editor work.

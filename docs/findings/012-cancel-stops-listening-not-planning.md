@@ -6,7 +6,7 @@ The footer offers `Cancel` as the primary action for the whole time a plan is
 running, which is the right offer — a plan against a real account takes 20 to 90
 seconds, and improvement.md organises most of the design around that wait.
 
-It does not cancel the plan. `Speculator.cancel` bumps a generation counter, and
+It doesn't cancel the plan. `Speculator.cancel` bumps a generation counter, and
 the generation check in `_begin`'s worker then discards the answer when it
 arrives. The engine keeps running to completion.
 
@@ -40,7 +40,7 @@ person cancelled. improvement.md §6 is about exactly this: the lock is the
 normal condition rather than an error, and the tool should be honest about who
 holds it.
 
-It is also a claim that is not true. The button says Cancel, the status says
+It is also a claim that isn't true. The button says Cancel, the status says
 cancelled, and the work continues.
 
 ## Fixed

@@ -3,7 +3,7 @@
 What changed, for somebody deciding whether to update. The investigations
 behind the harder changes are in `docs/findings/`.
 
-This project has not been released. Everything below is under `Unreleased`, and
+This project hasn't been released. Everything below is under `Unreleased`, and
 the first version number will be cut when the editor is usable for a day's work
 without surprises.
 
@@ -83,7 +83,7 @@ without surprises.
   that each open the tab explaining them, then the file facts. **A chip with
   nothing to say is absent, not empty**, and as the window narrows chips fall
   off the right, cheapest first — the verdict never drops. It turns for exactly
-  one condition: a plan that will not run.
+  one condition: a plan that won't run.
 - **A stale plan says it is stale**, and marks its counts as of when, rather
   than showing them as current.
 - **The right-hand inspector is gone.** It answered the same five questions the
@@ -104,12 +104,12 @@ without surprises.
   It was a flat list of every module in the workspace with the path flattened
   into the row — `examples/account-baseline/` and `modules/context/` as peers,
   each with its files under it. On a repository with 63 modules that is 273
-  rows with no hierarchy in them, and a file outside a Terraform module did not
+  rows with no hierarchy in them, and a file outside a Terraform module didn't
   appear at all.
 
   Git state is two pixels on the left edge, the plan's count is on the right,
   and **a directory carries the sum of what is under it**. Typing in the rail
-  opens the way to what matches. Stacks are not in it: a resident section that
+  opens the way to what matches. Stacks aren't in it: a resident section that
   says nothing on the ordinary day trains you to stop looking at that corner,
   so it is a verdict-line chip that appears only when a stack is behind
   something it depends on.
@@ -123,15 +123,15 @@ without surprises.
   output tab.
 - **Preferences is five pages instead of eight**, and a text setting says *Not
   set* rather than sitting blank. **The font row says when the family it names
-  is not installed**, because a font that silently substitutes is a design that
-  silently does not exist.
+  isn't installed**, because a font that silently substitutes is a design that
+  silently doesn't exist.
 - **Selecting a word outlines every other occurrence**, and the caret line
   takes a wash so you can find it after looking away.
 - **`Ctrl+D` answers.** It selects the next occurrence and says once what
-  multiple cursors would have done and why they are not there — with
+  multiple cursors would have done and why they aren't there — with
   **Help → What Backsight will not do**, which lists every toolkit limit, every
   deliberate refusal and everything not built yet.
-- Navigation history: **Back and Forward**, which did not exist anywhere.
+- Navigation history: **Back and Forward**, which didn't exist anywhere.
 
 ### Fixed
 
@@ -139,7 +139,7 @@ without surprises.
   click, so only two clicks a second apart counted.
 
 - **Refusing to open a file no longer closes the file you were reading.** The
-  previous tab was closed before the new one was read, so a file that is not
+  previous tab was closed before the new one was read, so a file that isn't
   UTF-8 — which is correctly refused — took a readable file with it.
 - **Two menu items no longer run one command.** *Line wrap* and *Word wrap*,
   *Ruler* and *Rulers*, and worst of all *Whitespace* and *Show whitespace*,
@@ -149,7 +149,7 @@ without surprises.
   the tab row, taking exactly the width the last tab needed.
 - **The irreversible group no longer fills its card.** Blocked is the only
   element allowed a full coloured background — that is the whole difference
-  between *this is dangerous* and *this will not run*.
+  between *this is dangerous* and *this won't run*.
 - The new-tab `+` moved out from beside the filename, and the plan's mark on a
   tab is no longer the desktop's *add* icon, which read as a second new-tab
   button.
@@ -194,7 +194,7 @@ without surprises.
   Three endings rather than two: applied, stopped part way, and nothing changed.
 - **Verification after apply.** The state is read back and checked against what
   the plan intended. It says which of the two it checked — recorded in state,
-  not serving traffic — and says it could not check rather than reporting
+  not serving traffic — and says it couldn't check rather than reporting
   success when there is no local state to read.
 - **Drift.** What changed outside Terraform, from a refresh-only plan. Names the
   resource and the attributes that moved, with the value each was and is, and
@@ -232,17 +232,17 @@ without surprises.
 - **No notice outlives what it is about.** Five were toasts asked to last
   forever.
 - Reading and writing the settings file disagreed about `XDG_CONFIG_HOME`.
-- The wheel could not build.
+- The wheel couldn't build.
 
 ### Still missing
 
 - **Signing in through IAM Identity Center**, which needs a real one to capture
   anything against.
-- **State locking is not surfaced** — a lock could not be held on this machine
+- **State locking isn't surfaced** — a lock couldn't be held on this machine
   to capture what one says.
 - **OPA and Trivy**, neither installed here.
 - **Import block generation**: the id format is per resource type and the
-  provider schema does not carry it.
+  provider schema doesn't carry it.
 
 ### Known gaps
 
@@ -250,13 +250,13 @@ without surprises.
   measures its own minimum and no stylesheet can move it; the rest costs
   drag-to-reorder, drag-out-to-split and the tab overview. See
   `docs/findings/017` and `docs/design-conformance.md`.
-- **Multiple cursors, column selection and code folding are not built**, and
-  will not be. GtkSourceView 5 has no API for any of them, and building them
+- **Multiple cursors, column selection and code folding aren't built**, and
+  won't be. GtkSourceView 5 has no API for any of them, and building them
   means reimplementing every editing path — which risks round-trip safety and
   the byte-exact guarantee. Decided rather than pending; see
   `docs/findings/002`.
 - **Apply against a real provider is unproven here.** It is exercised end to end
   against resources that reach nothing outside the machine, because this
   installation has no credentials and touches no cloud account.
-- **Apply against a real provider needs credentials this installation does not
+- **Apply against a real provider needs credentials this installation doesn't
   have**, so nobody has run it against an account.

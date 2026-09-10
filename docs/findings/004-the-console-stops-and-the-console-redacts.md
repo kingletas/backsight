@@ -16,7 +16,7 @@ var.nope           -> Error: Reference to undeclared input variable
 length([1,2,3])    -> never evaluated
 ```
 
-So a session cannot be one long-lived process that survives a typo, which is
+So a session can't be one long-lived process that survives a typo, which is
 what a REPL usually is. **One process per expression** is the only shape that
 gives an answer per expression. It costs about 47ms, measured, which is cheap
 enough that this is a design choice rather than a compromise.
@@ -26,7 +26,7 @@ keeps none.
 
 ## Results go to stdout, errors to stderr, both coloured
 
-ANSI escapes appear even when stdout is a pipe, so `-no-color` is not optional.
+ANSI escapes appear even when stdout is a pipe, so `-no-color` isn't optional.
 The error carries a location — `on <console-input> line 1` — which is always
 line 1 of what the person just typed, and is therefore noise. Strip it.
 
@@ -54,9 +54,9 @@ through every route tried:
 | `nonsensitive(var.token)` | the value |
 
 `nonsensitive()` is the documented opt-out and it is typed by hand, by the
-person, in their own console. That is the right boundary and we do not close it.
+person, in their own console. That is the right boundary and we don't close it.
 
 **We add no redaction pass of our own.** A second redactor would be a copy of a
-rule we do not own, and it could not tell the literal string `(sensitive value)`
+rule we don't own, and it couldn't tell the literal string `(sensitive value)`
 from a redaction. What we do instead is never write console output to a log or
 a file — FR-DBG-06 is upheld by not making a copy.

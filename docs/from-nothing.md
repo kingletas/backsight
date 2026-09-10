@@ -77,11 +77,11 @@ make app WORKSPACE=fixtures/plannable
 The window opens with the files of that workspace in the rail on the left.
 
 **One click on a file previews it** — it shows in the editor, and the next file
-you click replaces it, so looking around does not leave a tab per file. **Two
+you click replaces it, so looking around doesn't leave a tab per file. **Two
 clicks open it for good.** Open `main.tf`.
 
 > [!tip] If the window says the engine is missing
-> Backsight looked for `tofu` and did not find it. Everything except planning
+> Backsight looked for `tofu` and didn't find it. Everything except planning
 > still works. Install OpenTofu, or name a different binary — `terraform`, say —
 > in **Preferences → Terraform**.
 
@@ -100,7 +100,7 @@ Within a few seconds you should see:
 - **The Changes drawer**, headed `2 to add`.
 
 Colour means consequence and nothing else: green is safe, amber changes
-something in place, red cannot be undone. The **Plan** button in the top right
+something in place, red can't be undone. The **Plan** button in the top right
 turns red on its own when the plan destroys or replaces anything, so the
 control you are about to press already tells you what it will do.
 
@@ -136,6 +136,6 @@ you set one.
 
 ## Where to go next
 
-- [README](../README.md) — what works today, and what it deliberately does not do
+- [README](../README.md) — what works today, and what it deliberately doesn't do
 - [docs/design-conformance.md](design-conformance.md) — what is built, and how to build the rest
 - [CONTRIBUTING.md](../CONTRIBUTING.md) — the shape a change should arrive in

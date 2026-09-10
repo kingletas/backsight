@@ -20,7 +20,9 @@
 
 Backsight is a desktop application for engineers who write Terraform. It is not an editor plugin, not a web console, and not a wrapper that shells out to `terraform` behind a form. It is a purpose-built workbench that knows the language, the provider schemas, the current state, the target account, the cost model and the security consequences of what is being written — and makes all of that visible while the engineer types.
 
-The experience: open a workspace, scaffold a resource from an approved module, and write HCL in an editor that completes real subnet IDs from your account, marks which attributes will force a replacement, annotates instance types with their monthly cost, and shows the plan diff updating beside your code. Rename a resource and it generates the `moved` block so the rename doesn't destroy anything. Add a security group rule and it tells you, on that line, that you've just opened a four-hop path from the internet to a database. Run the whole thing against a local MiniStack container to prove it actually converges. Then apply — as yourself, via SSO, with no stored credentials anywhere.
+The experience: open a workspace, scaffold a resource from an approved module, and write HCL in an editor that completes real subnet IDs from your account, marks which attributes will force a replacement, annotates instance types with their monthly cost, and shows the plan diff updating beside your code.
+
+Rename a resource and it generates the `moved` block so the rename doesn't destroy anything. Add a security group rule and it tells you, on that line, that you've just opened a four-hop path from the internet to a database. Run the whole thing against a local MiniStack container to prove it actually converges. Then apply — as yourself, via SSO, with no stored credentials anywhere.
 
 It ships as a `.deb`. It starts in under two seconds. It has no browser engine, no JVM and no bundled runtime beyond Python. It works on a plane.
 

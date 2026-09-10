@@ -36,7 +36,7 @@ decides it.
 
 **Measuring before the view is realised measures the wrong font.** The
 stylesheet naming the family and the size is resolved at realisation, and even
-`realize` itself is too early — the values have not reached the Pango context
+`realize` itself is too early — the values haven't reached the Pango context
 yet. It is set again on the idle after realisation, and a row computed in the
 constructor was wrong by two pixels for the life of the page.
 
@@ -48,7 +48,7 @@ than clipping the text.
 
 Every size in this application is a **ratio of the body size**, deliberately, so
 that somebody who has set 150% text scaling for accessibility gets bigger code
-too — a px font size does not follow that setting and an `em` one does.
+too — a px font size doesn't follow that setting and an `em` one does.
 
 The consequence is that **the design's pixel numbers only hold on a desktop
 whose base font is 13px.** On this machine the base resolves to about 10.8px,

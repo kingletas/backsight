@@ -13,14 +13,14 @@ than by reading the list of names the architecture test maintained by hand.
 Wiring the obvious half brought it to **81**: the panel toggles, the annotation
 layers, the tab-closing group, the clipboard and undo, copy-path, the colour
 scheme override, plan, close, full screen and go-to-line. Every one of those
-was a feature that already existed and could not be reached from the menu that
+was a feature that already existed and couldn't be reached from the menu that
 named it.
 
 ## Why the existing test did not catch it
 
 `test_every_item_resolves_to_a_command_or_is_a_submenu` checks each action name
 against a set written in the test file. That set says a name is *intended*. It
-cannot say the name *works*, and every one of the 113 passed it.
+can't say the name *works*, and every one of the 113 passed it.
 
 Four annotation toggles — gutter verdicts, inline explanations, code lens,
 resolved values — sat in the View menu wired to nothing at all. Choosing one
@@ -35,8 +35,8 @@ gaps and the menu greys the ones that are known-impossible already.
 The rest are **built but named differently**. The window registers panel
 visibility as one parameterised `panel` action; the menu names
 `toggle-left-rail`, `toggle-right-rail`, `toggle-plan-drawer`. Both work; they
-are not the same string, so nothing joins them up. That is the more dangerous
-half, because the feature exists and the menu still cannot reach it.
+aren't the same string, so nothing joins them up. That is the more dangerous
+half, because the feature exists and the menu still can't reach it.
 
 ## What now holds the line
 
@@ -57,7 +57,7 @@ log (**10**), and the findings group (**5**).
   active one tracked by focus, and every method that touches `self._tabs` has
   to learn which. That is a feature, not a connection.
 - **`generate-import-block`** needs the import ID format for a resource type,
-  which is provider knowledge the schema does not carry.
+  which is provider knowledge the schema doesn't carry.
 - **`exclude-from-plan`** has no concept behind it. Nothing in the MVP knows
   what it would mean to plan a workspace with a file left out.
 

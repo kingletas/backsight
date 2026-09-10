@@ -38,13 +38,13 @@ resolves to one of four levels:
 | safe | additive, reversible | new resources, tag changes, satisfied policy |
 | disruptive | brief downtime, recoverable | in-place updates, drift, stale plan |
 | irreversible | destroy or replace, no rollback | `aws_db_instance` replacement, bucket destroy |
-| blocked | will not run | policy failure, missing backend, state lock held |
+| blocked | won't run | policy failure, missing backend, state lock held |
 
 `accent_*` is the fifth family and is explicitly **not** a severity. It marks
 the current file, selection, plan identifiers, and links. Never use it to say
 something is fine — safe already means that.
 
-Do not add a fifth severity. Six severities means nobody reads any of them.
+Don't add a fifth severity. Six severities means nobody reads any of them.
 
 ## Treatment rules
 

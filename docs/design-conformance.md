@@ -1,6 +1,6 @@
 # Conformance to design v2 — what is done, and how to do the rest
 
-**Read this with `docs/findings/`.** Every claim below that something cannot be
+**Read this with `docs/findings/`.** Every claim below that something can't be
 done points at a finding with the measurement in it. Nothing here is inferred
 from a filename or from a stylesheet: where a number appears, it was measured on
 a presented window or in a rendered screenshot.
@@ -27,7 +27,7 @@ a presented window or in a rendered screenshot.
 
 ### 1. The tab strip is 41px and the design says 28
 
-**Do not attempt this as part of a visual sweep.** →
+**Don't attempt this as part of a visual sweep.** →
 [017](findings/017-the-tab-strip-has-a-floor-of-41px.md) for the measurements.
 
 Six pixels were recovered by styling. The remaining thirteen, the `+` after the
@@ -68,11 +68,11 @@ design:
 
 | Where | What it should say |
 |---|---|
-| *Tabs* | The strip is **41px**. 28 is not reachable with `Adw.TabBar`; the cost of the rest is in finding 017 |
+| *Tabs* | The strip is **41px**. 28 isn't reachable with `Adw.TabBar`; the cost of the rest is in finding 017 |
 | *Foundations* | Sizes are **ratios of the desktop body size**, and the pixel figures hold at a 13px base. On this machine the code face renders at 11.2px |
-| *Drawer* | **Two ceilings**: content stops growing at 45%, a deliberate drag reaches 70%. One number could not carry both meanings |
+| *Drawer* | **Two ceilings**: content stops growing at 45%, a deliberate drag reaches 70%. One number couldn't carry both meanings |
 | *Apply — three endings* | **Consequence colour survives the apply.** A destroy that succeeded is still the row somebody is scanning to find |
-| *Drawer tabs* | **Ten**, not eight. Docs, Git and Output are real surfaces the guide did not enumerate, and the rule against hiding a tab is what puts them there |
+| *Drawer tabs* | **Ten**, not eight. Docs, Git and Output are real surfaces the guide didn't enumerate, and the rule against hiding a tab is what puts them there |
 
 ### 3. `UAT.md` case 7.1 contradicts a shipped and tested behaviour
 
@@ -83,7 +83,7 @@ asserts it.
 **The acceptance document contains a case the build is designed to fail.**
 Somebody driving UAT end to end records a failure that is a specification
 conflict. Amend 7.1 to the shipped model, or reverse the ruling — but not
-neither, because today the document cannot be run honestly.
+neither, because today the document can't be run honestly.
 
 ### 4. The review row is stacked, and the design puts it on one line
 
@@ -100,7 +100,7 @@ a 1280px window with the rail open** rather than at full screen.
 ### 5. Both design typefaces
 
 `fonts-jetbrains-mono` is installed and is what the code renders in.
-**`fonts-ibm-plex` is not**, so every interface label falls back to Cantarell
+**`fonts-ibm-plex` isn't**, so every interface label falls back to Cantarell
 and no claim about the sans is verified.
 
 ```bash
@@ -123,5 +123,5 @@ Five, each with a finding rather than a note in one module's docstring:
 | `line-height` meaning what it means on the web | [019](findings/019-line-height-and-em-sizing-meet-the-desktop.md) |
 
 Tab edge bars for plan impact and git state, and `Ctrl+K` chords, are declared
-in the implementation record: `Adw.TabPage` is not a widget, and GTK has no
+in the implementation record: `Adw.TabPage` isn't a widget, and GTK has no
 chord parser.

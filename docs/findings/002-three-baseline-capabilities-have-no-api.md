@@ -2,7 +2,7 @@
 
 **Status: decided, 2026-09-08 — not built, and said so. A fourth joined them in [016](016-indent-guides-have-no-api-either.md) on 2026-09-09, which is also where the dead keys stopped being silent.**
 
-Multiple cursors, column selection and code folding are not built and are not
+Multiple cursors, column selection and code folding aren't built and aren't
 planned. The cost is a rewrite of the editing layer, and what it puts at risk
 is round-trip safety and the byte-exact guarantee in `Page.content` — the two
 things this editor promises hardest. An editor that occasionally reformats
@@ -14,7 +14,7 @@ instead of implying an editing mode behind it.
 
 Original finding follows.
 
-**Status when written: needs a decision.** Sheet 9 states the baseline checklist exists as one requirement *"so an implementer cannot treat it as optional polish"*. Three of its items cannot be built on GtkSourceView 5 at all, and saying so is better than quietly shipping nine tenths of a row.
+**Status when written: needs a decision.** Sheet 9 states the baseline checklist exists as one requirement *"so an implementer cannot treat it as optional polish"*. Three of its items can't be built on GtkSourceView 5 at all, and saying so is better than quietly shipping nine tenths of a row.
 
 ## What is there, and it is most of it
 
@@ -28,7 +28,7 @@ Verified against GtkSourceView 5.12 and GTK 4.14 on this machine.
 | Display | **Done.** Line numbers, current line, rulers, wrap and wrap column, whitespace via `SpaceDrawer`, bracket matching |
 | Text handling | **Done.** Indentation detected from the file rather than imposed, tabs and spaces conversion, line endings, encoding, trailing whitespace |
 | History | **Done.** Undo, redo, one user action per operation |
-| Navigation | Partly. Go to line, matching bracket and definition exist; bookmarks and back/forward are not built |
+| Navigation | Partly. Go to line, matching bracket and definition exist; bookmarks and back/forward aren't built |
 | Clipboard | Not built. Paste from history and paste-and-indent are ours to write |
 | Selection | **Three items impossible.** See below |
 | Folding | **Impossible.** See below |

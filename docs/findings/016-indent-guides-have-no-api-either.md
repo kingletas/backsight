@@ -21,7 +21,7 @@ three in [002](002-three-baseline-capabilities-have-no-api.md):
 
 ## What changed, which is not the capability
 
-002 decided these are not built and said the menu items should say so. They did.
+002 decided these aren't built and said the menu items should say so. They did.
 What nobody had designed is **what happens when somebody reaches for one without
 opening a menu**, and that is the worst moment this application has: a keystroke
 from VS Code muscle memory that does nothing at all.
@@ -30,7 +30,7 @@ Three things answer it now.
 
 **`Ctrl+D` does the useful half.** It selects the next occurrence of the word
 under the caret — which is a real command, on the key people press for it — and
-says once, in a dismissible line, that multiple cursors are not available and
+says once, in a dismissible line, that multiple cursors aren't available and
 what does most of what they are reached for. Once per session, never again.
 
 **Every blocked menu item carries its own reason** on the item rather than being
@@ -45,7 +45,7 @@ read it.
 ## Why not build the guide by drawing it
 
 It could be drawn: a `GutterRenderer` knows where a line starts and the buffer
-knows its indentation, so a one-pixel rule at the right column is not hard.
+knows its indentation, so a one-pixel rule at the right column isn't hard.
 
 **It would be drawn in the wrong place the moment anything moved.** The guide
 has to track the *enclosing block*, which means asking the syntax tree where the
@@ -54,7 +54,7 @@ the gutter — which is where `add_overlay` puts a widget in buffer coordinates
 and where the annotation lane already lives. Two overlay systems competing for
 the same rows, to draw a line.
 
-The cost is not the drawing. It is that a guide which is subtly wrong about
+The cost isn't the drawing. It is that a guide which is subtly wrong about
 where a block starts is worse than no guide, because it is read as structure.
 
 ## What this does not change

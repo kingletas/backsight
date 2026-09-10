@@ -8,7 +8,7 @@ which is the screen the developer is working on. Windows appeared over their
 work, took focus, and took the pointer with them.
 
 The test suite was worse, because it looked innocent. Constructing a window
-does not map it, so for a long time nothing appeared. Then
+doesn't map it, so for a long time nothing appeared. Then
 `test_every_action_activates` began activating **every** action, and several of
 them present a dialog: rename, delete, discard, move, suppress, About. A test
 run started throwing dialogs onto the screen.
@@ -20,11 +20,11 @@ memory.** The machine was genuinely short of memory, so the explanation fitted
 — and it was wrong. Keystrokes typed at the desk were landing in windows the
 test run had opened.
 
-Two things to take from it. **A plausible cause that fits the evidence is not
+Two things to take from it. **A plausible cause that fits the evidence isn't
 the cause**, and "the machine is short of memory" is exactly the sort of
 explanation that ends an investigation early because it feels sufficient. And
 **the question only arose because of a defect** — the windows should never have
-been on the developer's screen, so the interference was not an environmental
+been on the developer's screen, so the interference wasn't an environmental
 fact to explain but a bug to fix.
 
 ## What it is now
@@ -35,7 +35,7 @@ it **before anything imports `gi`**, because GTK connects to a display when it
 is initialised and by then the choice is made.
 
 `:0` and `:1` are excluded by construction rather than by luck. The server is
-registered with `atexit`, so a crashing run does not leak one. With no `Xvfb`
+registered with `atexit`, so a crashing run doesn't leak one. With no `Xvfb`
 installed nothing is changed and the caller is told so, rather than failing.
 
 `BACKSIGHT_DISPLAY` overrides it, which is how somebody watches the smoke run:
@@ -49,7 +49,7 @@ being on the screen as acceptable as long as it is small.
 Windows kept appearing, twice, after the private display was in place, and the
 first explanation was wrong both times.
 
-**`Gtk.FileDialog` does not draw a window in this process.** It asks
+**`Gtk.FileDialog` doesn't draw a window in this process.** It asks
 `xdg-desktop-portal` in the desktop session to show a file chooser, and
 `Gio.AppInfo.launch*` starts the file manager or terminal the same way.
 Neither is on our `DISPLAY`. No X server we start can contain them, and there
@@ -71,10 +71,10 @@ which is also why the run died at a different point each time.
 
 ## The other half: the fallback was the desktop
 
-`use_a_private_display` returned `None` when it could not start a server, and
+`use_a_private_display` returned `None` when it couldn't start a server, and
 the caller carried on with whatever `DISPLAY` already said. That is the exact
 failure this module exists to prevent, arriving quietly through its own error
-path. It raises `NoPrivateDisplay` now: a run that cannot be contained should
+path. It raises `NoPrivateDisplay` now: a run that can't be contained should
 not happen at all.
 
 ## And the private display was never used at all
@@ -89,7 +89,7 @@ simply ignored. Every window went to the desktop's compositor while a private X
 server sat running and empty beside it.
 
 It also explains why looking for the intruder found nothing. `wmctrl` and
-`xdotool` are X11 clients: they cannot see Wayland windows, so a watcher polling
+`xdotool` are X11 clients: they can't see Wayland windows, so a watcher polling
 `DISPLAY=:0` during a full test run reported a clean screen while windows were
 opening on it.
 

@@ -1,6 +1,6 @@
 # Toolkit notes
 
-What was verified against the installed toolkit rather than remembered. Add to this whenever a lookup costs you more than a minute, so the next person does not pay for it twice.
+What was verified against the installed toolkit rather than remembered. Add to this whenever a lookup costs you more than a minute, so the next person doesn't pay for it twice.
 
 Installed here: GTK 4.14.5, libadwaita 1.5.0, GtkSourceView 5.12.0, PyGObject 3.48.2, on Python 3.12.3.
 
@@ -26,7 +26,7 @@ Installed here: GTK 4.14.5, libadwaita 1.5.0, GtkSourceView 5.12.0, PyGObject 3.
 
 **A schema has no provider version in it.** The keys of `provider_schemas` are bare addresses like `registry.opentofu.org/hashicorp/aws`. The version has to be supplied by whoever captured it, which in a workspace means the lock file.
 
-**`resource_schemas[type].version` is not the provider version.** It is the state schema version, an integer the provider bumps when it needs to migrate existing state. Reading it as a provider version gives you `1` for almost everything.
+**`resource_schemas[type].version` isn't the provider version.** It is the state schema version, an integer the provider bumps when it needs to migrate existing state. Reading it as a provider version gives you `1` for almost everything.
 
 **There is no `default` and no force-replacement field.** The eight attribute keys are `computed`, `deprecated`, `description`, `description_kind`, `optional`, `required`, `sensitive`, `type`. See `docs/findings/001-...`.
 
@@ -36,44 +36,44 @@ Installed here: GTK 4.14.5, libadwaita 1.5.0, GtkSourceView 5.12.0, PyGObject 3.
 
 **`CompletionContext.get_bounds()` returns three values**, `(found, start, end)`. Unpacking it as two raises inside a `populate_async` callback, where the only visible symptom is a `GTask ... finalized without ever returning` warning and a popup that stays empty. It was found by driving the real popup; nothing else noticed.
 
-**A `GtkSource.CompletionProvider` written in Python has not been made to work here.** `do_populate_async` has to hand back a `GAsyncResult` that `do_populate_finish` can read. Building one with `Gio.Task.new(self, cancellable, callback, data)` and returning either a boxed value or a boolean both end the same way: `g_task_get_source_object: assertion 'G_IS_TASK (task)' failed`, then a segmentation fault, with the assertion firing before any Python in `populate_finish` runs.
+**A `GtkSource.CompletionProvider` written in Python hasn't been made to work here.** `do_populate_async` has to hand back a `GAsyncResult` that `do_populate_finish` can read. Building one with `Gio.Task.new(self, cancellable, callback, data)` and returning either a boxed value or a boolean both end the same way: `g_task_get_source_object: assertion 'G_IS_TASK (task)' failed`, then a segmentation fault, with the assertion firing before any Python in `populate_finish` runs.
 
 The engine side is finished and tested (`engine/schema/completion.py`); only the popup is unwired. Whoever picks this up should try a `GtkSource.CompletionWords` subclass, or check whether this PyGObject version can construct a task the C side accepts at all, before writing more provider code.
 
-**Headless screenshots work, and every way of getting them wrong is silent.** The cause of a blank or stale picture is almost always that the main loop was not iterated enough, not the capture API.
+**Headless screenshots work, and every way of getting them wrong is silent.** The cause of a blank or stale picture is almost always that the main loop wasn't iterated enough, not the capture API.
 
 - **Wait for the condition, never for a duration.** A fixed `pump(1.2)` is a guess about somebody else's machine. Waiting until the thing being checked is actually true gives the loop as many iterations as it needs, and it is what made this work.
-- A **fresh** `Gtk.WidgetPaintable` per screenshot is correct. Do not cache one: a cached paintable saves every image as a copy of the first frame, which passes every check while the pictures are worthless.
-- `invalidate_contents()` does not rescue a stale paintable, and requesting extra frame phases does not rescue an empty one.
+- A **fresh** `Gtk.WidgetPaintable` per screenshot is correct. Don't cache one: a cached paintable saves every image as a copy of the first frame, which passes every check while the pictures are worthless.
+- `invalidate_contents()` doesn't rescue a stale paintable, and requesting extra frame phases doesn't rescue an empty one.
 - `snapshot_child` warns *"without a current allocation"* after any widget rebuild.
 - `import -window root` under `xvfb` captures a blank screen: with no window manager the window is never mapped to X.
 
-**The trap that hid all of this**: images from earlier runs sit on disk looking correct, so the files being read are not the files the run just wrote. `gui-smoke.py` deletes the directory before it starts, fails when a screenshot did not save, and fails when its screenshots are not all different from each other.
+**The trap that hid all of this**: images from earlier runs sit on disk looking correct, so the files being read aren't the files the run just wrote. `gui-smoke.py` deletes the directory before it starts, fails when a screenshot didn't save, and fails when its screenshots aren't all different from each other.
 
-**A `GtkSource.CompletionProvider` written in Python has not been made to work here.** `do_populate_async` has to hand back a `GAsyncResult` that `do_populate_finish` can read. Building one with `Gio.Task.new(self, cancellable, callback, data)` and returning either a boxed value or a boolean both end the same way: `g_task_get_source_object: assertion 'G_IS_TASK (task)' failed`, then a segmentation fault, with the assertion firing before any Python in `populate_finish` runs.
+**A `GtkSource.CompletionProvider` written in Python hasn't been made to work here.** `do_populate_async` has to hand back a `GAsyncResult` that `do_populate_finish` can read. Building one with `Gio.Task.new(self, cancellable, callback, data)` and returning either a boxed value or a boolean both end the same way: `g_task_get_source_object: assertion 'G_IS_TASK (task)' failed`, then a segmentation fault, with the assertion firing before any Python in `populate_finish` runs.
 
 The engine side is finished and tested (`engine/schema/completion.py`); only the popup is unwired. Whoever picks this up should try a `GtkSource.CompletionWords` subclass, or check whether this PyGObject version can construct a task the C side accepts at all, before writing more provider code.
 
-**Screenshotting a GTK4 window from a headless run does not work reliably here, and every way of getting it wrong is silent.**
+**Screenshotting a GTK4 window from a headless run doesn't work reliably here, and every way of getting it wrong is silent.**
 
-The first screenshot of a run saves and the rest usually do not. This went unnoticed for most of a session because the images from *earlier* runs were still on disk and looked correct — so the files being read were not the files the run had just written. `gui-smoke.py` deletes the directory before it starts now, for exactly that reason.
+The first screenshot of a run saves and the rest usually don't. This went unnoticed for most of a session because the images from *earlier* runs were still on disk and looked correct — so the files being read weren't the files the run had just written. `gui-smoke.py` deletes the directory before it starts now, for exactly that reason.
 
-- A **fresh** `Gtk.WidgetPaintable` per screenshot receives contents the first time and produces an empty node for every call after a widget rebuild, whatever frame phases you request. Result: the first image saves and the rest silently do not.
-- A **cached** paintable saves every image and freezes on the first frame, so every screenshot is a byte-identical copy of the first. `invalidate_contents()` does not help.
-- `snapshot_child` gives a real node until the first rebuild, then warns *"without a current allocation"* and returns nothing, because the frame clock is not advancing under a hand-rolled main-loop pump.
+- A **fresh** `Gtk.WidgetPaintable` per screenshot receives contents the first time and produces an empty node for every call after a widget rebuild, whatever frame phases you request. Result: the first image saves and the rest silently don't.
+- A **cached** paintable saves every image and freezes on the first frame, so every screenshot is a byte-identical copy of the first. `invalidate_contents()` doesn't help.
+- `snapshot_child` gives a real node until the first rebuild, then warns *"without a current allocation"* and returns nothing, because the frame clock isn't advancing under a hand-rolled main-loop pump.
 - `import -window root` under `xvfb` captures a blank 290-byte screen: with no window manager the window is never mapped to X.
 
-The behavioural checks are unaffected — they read widget state directly and are real. **Only the pictures are wrong**, and the failure is silent in every variant, which is why `gui-smoke.py` now fails when its screenshots are not all different from each other.
+The behavioural checks are unaffected — they read widget state directly and are real. **Only the pictures are wrong**, and the failure is silent in every variant, which is why `gui-smoke.py` now fails when its screenshots aren't all different from each other.
 
-**What the smoke does now:** a fresh paintable per screenshot, which is right most of the time and occasionally misses one, and two checks that turn either failure into a red run — one for a screenshot that did not save, one for screenshots that are not all different from each other. Of the two ways this can be wrong, take the loud one.
+**What the smoke does now:** a fresh paintable per screenshot, which is right most of the time and occasionally misses one, and two checks that turn either failure into a red run — one for a screenshot that didn't save, one for screenshots that aren't all different from each other. Of the two ways this can be wrong, take the loud one.
 
 Whoever picks this up: try running the smoke against a real display rather than `xvfb`, or a nested compositor with a window manager, before writing more capture code.
 
-**A `Gtk.TextTag` that adds line height does not change `get_line_yrange` until a layout pass has run.** Apply the tag and ask immediately and you get the old height — so anything positioned from that answer lands short by exactly the height you just added. In the verdict bands that meant every band drawn on top of the line of code it belonged to, while every check passed. Place from an idle callback, not from the function that applied the tag.
+**A `Gtk.TextTag` that adds line height doesn't change `get_line_yrange` until a layout pass has run.** Apply the tag and ask immediately and you get the old height — so anything positioned from that answer lands short by exactly the height you just added. In the verdict bands that meant every band drawn on top of the line of code it belonged to, while every check passed. Place from an idle callback, not from the function that applied the tag.
 
-**`Adw.TabPage` is a `GObject`, not a `Gtk.Widget`.** It cannot take a CSS class, so a tab cannot have coloured edges, a coloured background or any per-tab styling. What it has is `icon`, `indicator-icon`, `title`, `tooltip` and `needs-attention`.
+**`Adw.TabPage` is a `GObject`, not a `Gtk.Widget`.** It can't take a CSS class, so a tab can't have coloured edges, a coloured background or any per-tab styling. What it has is `icon`, `indicator-icon`, `title`, `tooltip` and `needs-attention`.
 
-Sheet 10's anatomy — git on the left edge, plan impact along the bottom, unsaved on the right — is not reachable through `Adw.TabBar`. Everything it wants to *say* fits in two icon slots and a title; the geometry does not. Buying the edges means writing a tab bar, which costs drag-to-reorder, drag-out-to-split, the overflow behaviour and `Adw.TabOverview`. That is a decision rather than a task.
+Sheet 10's anatomy — git on the left edge, plan impact along the bottom, unsaved on the right — isn't reachable through `Adw.TabBar`. Everything it wants to *say* fits in two icon slots and a title; the geometry doesn't. Buying the edges means writing a tab bar, which costs drag-to-reorder, drag-out-to-split, the overflow behaviour and `Adw.TabOverview`. That is a decision rather than a task.
 
 **`Gtk.TextBuffer.get_selection_bounds()` returns an empty tuple when nothing is selected**, and a `(start, end)` pair when something is. There is no found flag, unlike almost every other multiple-return in this API — unpacking it as three values raises `not enough values to unpack (expected 3, got 0)` on the ordinary case of a cursor with no selection.
 

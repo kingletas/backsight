@@ -40,11 +40,11 @@ Gtk.HeaderBar
 
 The environment chip takes its consequence class from the workspace, not a
 fixed colour: `prod` → `.tf-disruptive`, everything else → no chip at all.
-Do not invent a colour for `staging`; an uncoloured name is the neutral case.
+Don't invent a colour for `staging`; an uncoloured name is the neutral case.
 
 ### Popover contents
 
-`Gtk.PopoverMenu` is not flexible enough here — use a plain `Gtk.Popover`
+`Gtk.PopoverMenu` isn't flexible enough here — use a plain `Gtk.Popover`
 containing a `Gtk.ListBox` with `selection-mode: none`.
 
 Header row: "Open workspaces", `.tf-micro .tf-faint`.
@@ -77,7 +77,7 @@ non-Apple keyboards) right-aligned.
 ### While you are in this file
 
 The empty state currently offers "Open workspace…" and "Open example
-workspace" side by side as equals. They are not equals: one is what a real user
+workspace" side by side as equals. They aren't equals: one is what a real user
 does, the other is a demo. Keep "Open workspace…" as the single accent button
 and demote the example to a text link beneath it.
 
@@ -99,7 +99,7 @@ Nowhere does the dialog say what Backsight is.
 ### Do not extend AdwAboutDialog
 
 It owns its icon, version pill, and row structure, and sources most of it from
-appstream metainfo. It cannot produce this layout. Build a `AdwDialog`
+appstream metainfo. It can't produce this layout. Build a `AdwDialog`
 subclass, `BacksightAboutDialog`, 340px content width.
 
 Keep `AdwAboutDialog` — construct it lazily behind the "Credits and legal" row,
@@ -133,8 +133,8 @@ Description string, verbatim:
 | Terraform | `1.9.8 detected` | `terraform version -json`, resolved at startup |
 | Tested against | `1.6 – 1.9` | constant in the build |
 
-Suffix labels are mono (`.tf-mono .tf-small`). If the Terraform binary is not
-found, the value reads `not found` in `.tf-nostate` — do not hide the row. The
+Suffix labels are mono (`.tf-mono .tf-small`). If the Terraform binary isn't
+found, the value reads `not found` in `.tf-nostate` — don't hide the row. The
 absence is the useful information.
 
 These three exist because the first three questions on any bug report against
@@ -155,7 +155,7 @@ Footer, below the groups, `.tf-micro .tf-faint`, centred, wrapped:
 > A backsight is the reading a surveyor takes back to a known point, to
 > establish where they are before measuring forward.
 
-This is not decoration. It is the only place the product explains its own
+This isn't decoration. It is the only place the product explains its own
 premise, and the premise is the reason to prefer this over a terminal.
 
 ---
@@ -170,7 +170,7 @@ data/icons/hicolor/scalable/apps/dev.backsight.Backsight.svg
 data/icons/hicolor/symbolic/apps/dev.backsight.Backsight-symbolic.svg
 ```
 
-The app ID must match the filename or the icon will not resolve. Set
+The app ID must match the filename or the icon won't resolve. Set
 `Gtk.Window.set_default_icon_name()` to the same string, and reference it in the
 `.desktop` file and the appstream metainfo.
 
@@ -184,7 +184,7 @@ because it is also the window icon and the dock tile.
 
 - No accent-filled button remains in the header bar in any state.
 - `Ctrl+O` opens a workspace with the header bar button gone.
-- Switching workspaces from the popover does not lose unsaved buffers — prompt
+- Switching workspaces from the popover doesn't lose unsaved buffers — prompt
   first, in the same style as the apply gate: name the consequence, then act.
 - The About dialog shows a real icon, not the document fallback.
 - With no Terraform binary on PATH, the About dialog still opens and the

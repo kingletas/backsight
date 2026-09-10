@@ -20,7 +20,7 @@ dpi 98304                    px-sized=  79  em-sized=  79
 dpi 196608 (text scale 2x)   px-sized=  79  em-sized= 162
 ```
 
-`gtk-xft-dpi` is what the text scaling factor moves. A px size does not follow
+`gtk-xft-dpi` is what the text scaling factor moves. A px size doesn't follow
 it. An em size follows it exactly once.
 
 ## What it costs today

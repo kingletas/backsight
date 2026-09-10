@@ -18,7 +18,7 @@ and nineteen pixels of tab strip is a third of that saving.
 | Strip | 47px | **41px** | 28px |
 | `AdwTab` | 34px | **34px** | — |
 
-The six pixels came off the bar and the box. **`AdwTab` did not move at all.**
+The six pixels came off the bar and the box. **`AdwTab` didn't move at all.**
 
 ## Why the tab will not move
 
@@ -38,18 +38,18 @@ tabbar tabbox > tab { min-height: 10px; padding: 0 8px; }           → 34px
 tabbar tabbox { padding: 0; }                                       → 41px
 ```
 
-**A stylesheet cannot reach a measurement made in C.** That is the finding.
+**A stylesheet can't reach a measurement made in C.** That is the finding.
 
 ## Two more of the design's tab requirements come from the same place
 
 Checked against the installed libadwaita 1.5, property by property:
 
-| Wanted | Why it cannot be done |
+| Wanted | Why it can't be done |
 |---|---|
 | **The `+` sits after the last tab, never elsewhere** | `Adw.TabBar` has exactly two slots — `set_start_action_widget` and `set_end_action_widget`. There is no slot after the last tab, and the tab box is built from the view's pages. Ours is at the end of the strip. |
 | **The dirty dot replaces the close button in the same 14px** | `Adw.TabPage` exposes `indicator-icon` and nothing that hides or replaces the close button. So the dot takes the indicator slot and the close button stays beside it — which is also the slot the plan-impact mark wants. |
 
-**These are not three problems. They are one decision**, and it is the same
+**These aren't three problems. They are one decision**, and it is the same
 decision as the height: keep `Adw.TabBar`, or build the strip.
 
 ## What the remaining thirteen pixels cost
@@ -61,10 +61,10 @@ italic preview label and both edge bars. It costs:
 
 | Lost | Why |
 |---|---|
-| Drag to reorder | `Adw.TabBar` provides it; a hand-built strip does not |
+| Drag to reorder | `Adw.TabBar` provides it; a hand-built strip doesn't |
 | Drag out to split | same |
 | `Adw.TabOverview` | it is fed by the bar |
-| The tab context menu | `editor.py` hit-tests tabs by walking the bar's own widgets, because `Adw.TabPage` is not one |
+| The tab context menu | `editor.py` hit-tests tabs by walking the bar's own widgets, because `Adw.TabPage` isn't one |
 | Middle-click closes | the same hit-test path |
 
 The last two are wired and inventoried in `engine/layout/mouse.py`, and every
@@ -79,4 +79,4 @@ guide for building the in-house strip when somebody decides the height is worth
 more than the five.
 
 **The design guide should record 41px as the shipped figure**, so the next
-reader is not measuring a gap that has already been investigated.
+reader isn't measuring a gap that has already been investigated.

@@ -1,6 +1,6 @@
 # Finding 001 — force-replacement is not in the provider schema
 
-**Status: ruled on 2026-09-07 — the plan is the source. See `docs/decisions/001-force-replacement-comes-from-the-plan.md`.** The evidence below stands as the reason. The requirement rested on a premise that is not true, so it was raised for a ruling rather than quietly dropped or rewritten.
+**Status: ruled on 2026-09-07 — the plan is the source. See `docs/decisions/001-force-replacement-comes-from-the-plan.md`.** The evidence below stands as the reason. The requirement rested on a premise that isn't true, so it was raised for a ruling rather than quietly dropped or rewritten.
 
 ## The claim
 
@@ -20,7 +20,7 @@ computed, deprecated, description, description_kind, optional, required, sensiti
 
 There is no force-replacement field. The only match for `force_new` anywhere in 13 MB is `force_new_deployment`, an ECS *attribute name*. No description contains the phrase "forces new resource" — the JSON carries none of the registry's prose.
 
-**The schema cannot answer this question.** Not for AWS, not for any provider: the field does not exist in the format.
+**The schema can't answer this question.** Not for AWS, not for any provider: the field doesn't exist in the format.
 
 ## Where the fact does live
 
@@ -45,21 +45,21 @@ That is `fixtures/plan/replace.json`, and it is exactly the "in a plan twenty mi
 | `aws_ecs_cluster` | **0** |
 | `aws_lambda_function` | **0** |
 
-`aws_subnet` certainly has force-new arguments. The doc does not say so. A parser over this source is right where the prose is right and silently wrong everywhere else — which is the false-negative failure R-3 calls worse than noise, moved from the exposure analyser into the editor.
+`aws_subnet` certainly has force-new arguments. The doc doesn't say so. A parser over this source is right where the prose is right and silently wrong everywhere else — which is the false-negative failure R-3 calls worse than noise, moved from the exposure analyser into the editor.
 
 ## And the example itself is wrong
 
-`aws_instance.instance_type` **does not force replacement.** The provider's own documentation says:
+`aws_instance.instance_type` **doesn't force replacement.** The provider's own documentation says:
 
 > Updates to this field will trigger a stop/start of the EC2 instance.
 
-It is an in-place update. So plate 01's annotation, and the schema index's acceptance test, both assert something untrue about the resource they chose to demonstrate it on. It probably was ForceNew years ago; it is not now.
+It is an in-place update. So plate 01's annotation, and the schema index's acceptance test, both assert something untrue about the resource they chose to demonstrate it on. It probably was ForceNew years ago; it isn't now.
 
 ## What this leaves
 
 Three options, and the choice is a product decision rather than an implementation one.
 
-1. **Serve it from the docs mirror and mark the gaps.** Honest, partial, and requires saying "unknown" rather than "no" for every attribute the prose does not mention. Needs the documentation mirror, which the agreed MVP cut currently excludes.
+1. **Serve it from the docs mirror and mark the gaps.** Honest, partial, and requires saying "unknown" rather than "no" for every attribute the prose doesn't mention. Needs the documentation mirror, which the agreed MVP cut currently excludes.
 2. **Serve it from the speculative plan.** Accurate and complete, and it is a plan result rather than a keystroke result — which is a real feature, just not this one.
 3. **Build the table another way** — read it out of each provider's Go source, or derive it by planning attribute mutations against a fixture workspace. Accurate, and a large ongoing cost per provider and per version.
 
@@ -69,6 +69,6 @@ There is no fourth option where the schema answers it.
 
 **Option 2 for the MVP, and say so plainly in the interface.** It is truthful, it needs no new source, and the speculative plan is already in the cut. Then option 1 as an enrichment once the docs mirror exists, marked as partial wherever the prose is silent.
 
-What this costs is the specific claim that the fact arrives at the keystroke. That claim cannot be met from the schema by anyone, including the tools the BRD compares against.
+What this costs is the specific claim that the fact arrives at the keystroke. That claim can't be met from the schema by anyone, including the tools the BRD compares against.
 
 **Unblocked by the ruling.** The schema index records what the schema carries and asserts nothing about replacement; the hover reads the plan.

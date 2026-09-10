@@ -14,7 +14,7 @@ it. GTK 4 and libadwaita, Python, no browser engine.
 
 ## What it is for
 
-Writing Terraform has no feedback loop shorter than a full CI run. You cannot
+Writing Terraform has no feedback loop shorter than a full CI run. You can't
 see what your code will do, what it will cost, or what it exposes, until after
 commit, push and wait.
 
@@ -48,14 +48,14 @@ Backsight puts that feedback beside the file you are typing in.
 
 ## What it deliberately does not do
 
-**Multiple cursors, column selection, code folding and indent guides are not
+**Multiple cursors, column selection, code folding and indent guides aren't
 built.** GtkSourceView 5 has no API for any of them, and building the first
 three means reimplementing every editing path — which puts at risk the two
-things this editor promises hardest: that it never rewrites a file it was not
+things this editor promises hardest: that it never rewrites a file it wasn't
 asked to, and that what you saved is byte for byte what you typed.
 
 Anybody arriving from VS Code will notice, so **the keys answer rather than
-going quiet**: `Ctrl+D` selects the next occurrence and says once what it cannot
+going quiet**: `Ctrl+D` selects the next occurrence and says once what it can't
 do and what to use instead, every blocked menu item carries its own reason, and
 **Help → What Backsight will not do** lists all four limits, the four things
 this refuses on purpose, and the three that are simply not built yet. The
@@ -70,7 +70,7 @@ turn that off.
 Sign-in through IAM Identity Center, surfacing a held state lock, and generating
 `import` blocks. Each is waiting on something real rather than on time — an
 Identity Center to capture against, a lock that can be held, and an id format
-the provider schema does not carry.
+the provider schema doesn't carry.
 
 ## Running it
 
@@ -105,7 +105,7 @@ The engine knows nothing about the toolkit — `src/backsight/engine/` may not
 import `gi`, and a test enforces that. Everything on screen is in
 `src/backsight/app/`. A findings document in [`docs/findings/`](docs/findings/)
 records each investigation that changed the design, including the ones where
-the answer was that a thing could not be done.
+the answer was that a thing couldn't be done.
 
 - [CONTRIBUTING.md](CONTRIBUTING.md) — the shape a change should arrive in
 - [SECURITY.md](SECURITY.md) — the model, and where to report something
