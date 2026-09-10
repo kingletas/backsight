@@ -1,8 +1,8 @@
 # The emulator the integration suite runs against. Disposable by construction:
 # nothing in it is persisted, and `scripts/down` takes the volume with it.
 #
-# **It does not share the one `dev-services` runs.** That stack has a MiniStack
-# of its own on 4566, it belongs to whoever started it, and a suite that resets
+# **It never shares an emulator already running.** MiniStack's default port is
+# 4566, one there belongs to whoever started it, and a suite that resets
 # somebody else's emulator between tests is a suite that deletes their work.
 # This one has its own project name, its own container name and its own port.
 name: backsight-infra-test

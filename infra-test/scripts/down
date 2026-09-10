@@ -8,7 +8,7 @@
 #        this is the default; the flag is here because the habit is worth having.
 #
 # Safe to run when nothing is up. **It only ever touches this project's own
-# stack** — `dev-services` runs an emulator of its own and it is not ours.
+# stack** — an emulator started by anything else is not ours to stop.
 set -euo pipefail
 
 here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"

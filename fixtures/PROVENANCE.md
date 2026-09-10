@@ -33,8 +33,8 @@ The last two are a matched pair, and they are the ground truth the whole refacto
 
 ## Not captured, and why
 
-- **`lsp/initialize.json`** — `terraform-ls` is not installed on this machine; the binary on `PATH` is a placeholder that says so. The LSP client is outside the agreed MVP, so this is deferred rather than blocked. Capture it before starting on the client.
-- **`ministack/`** — the emulator is outside the agreed MVP, so nothing here is captured against it yet. **It does exist**: `ministackorg/ministack`, MIT licensed, on PyPI and Docker Hub, so BRD DD-4's claims hold and the sandbox work is not blocked on the question. Capture these before starting on it.
+- **`lsp/initialize.json`** — `terraform-ls` isn't installed on this machine; the binary on `PATH` is a placeholder that says so. The LSP client is outside the agreed MVP, so this is deferred rather than blocked. Capture it before starting on the client.
+- **`ministack/`** — the emulator is outside the agreed MVP, so nothing here is captured against it yet. **It does exist**: `ministackorg/ministack`, MIT licensed, on PyPI and Docker Hub, so BRD DD-4's claims hold and the sandbox work isn't blocked on the question. Capture these before starting on it.
 
 ## `local-state/`
 
@@ -65,7 +65,7 @@ engine. OpenTofu 1.12.6, 2026-09-07.
 ## `fmt/`
 
 `unformatted.tf` written by hand, `formatted.tf` its output through
-`tofu fmt -`, and `broken.out` what `fmt -` says about a file that will not
+`tofu fmt -`, and `broken.out` what `fmt -` says about a file that won't
 parse. OpenTofu 1.12.6, 2026-09-07.
 
 
@@ -82,7 +82,7 @@ state, so it carries all four kinds of change — a create, an update, a replace
 chain where the second has a `local-exec` provisioner that exits 3. The first
 resource is created and stays created, the second errors, and the third is
 never reached. That is the partial-apply state the apply screen exists to
-describe, and it cannot be written by hand convincingly — the interleaving and
+describe, and it can't be written by hand convincingly — the interleaving and
 the `apply_errored`/`provision_errored` pair are what the parser reads.
 
 Both on `terraform_data`, so no provider, no credentials and no network, and
@@ -110,7 +110,7 @@ edited outside Terraform and another was deleted; it carries the
 same run's structured document, trimmed to `resource_drift`, which is where the
 before-and-after attribute values live. `none.jsonl` is the same workspace after
 reconciling, and carries no drift events at all — the quiet case, because a
-check that has only ever been seen firing has not been tested.
+check that has only ever been seen firing hasn't been tested.
 
 OpenTofu 1.12.6 with `opentofu/local` 2.5, 2026-09-08.
 
@@ -122,7 +122,7 @@ version strings and protocols — the platform lists are most of the bytes and
 nothing reads them. Twenty-eight versions, newest first, which is the ordering
 the check depends on and the reason a capture is worth more than a guess.
 
-A request for a provider that does not exist answers `404`, which is why an
+A request for a provider that doesn't exist answers `404`, which is why an
 unknown provider is a silence rather than an error. Captured 2026-09-08.
 
 ## `docs/`
@@ -141,7 +141,7 @@ fenced Terraform. The examples are the part worth having: they are the
 provider's own, they are correct, and they are what somebody actually wants
 when they open documentation.
 
-A request for a resource that does not exist answers `404`, which is why an
+A request for a resource that doesn't exist answers `404`, which is why an
 unknown resource is a silence rather than an error.
 
 terraform-provider-aws v5.82.2 and terraform-provider-local v2.5.2,
@@ -158,10 +158,10 @@ in every `file_abs_path` and `definition_context_file_path`; nothing else change
 
 `checkov-clean.json` is the same command against a workspace built on
 `terraform_data`, which has nothing to find. It is the more important of the
-two: a checker that has only ever been seen firing has not been tested, and the
-clean shape is not the failing shape with an empty list in it.
+two: a checker that has only ever been seen firing hasn't been tested, and the
+clean shape isn't the failing shape with an empty list in it.
 
-Checkov 3.x, 2026-09-08. OPA and Trivy are not installed on this machine, so
+Checkov 3.x, 2026-09-08. OPA and Trivy aren't installed on this machine, so
 there is no capture for either and nothing is written against them.
 
 ## `git/`

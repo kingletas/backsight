@@ -30,8 +30,8 @@ ROOT = Path(__file__).resolve().parents[2]
 FIXTURES = ROOT / "infra-test" / "terraform"
 COMPOSE = ROOT / "infra-test" / "docker-compose.yml"
 
-# Not 4566. `dev-services` runs an emulator of its own there, it belongs to
-# whoever started it, and a suite that resets somebody else's emulator between
+# Not 4566, MiniStack's default: an emulator already there belongs to whoever
+# started it, and a suite that resets somebody else's emulator between
 # cases is a suite that deletes their work.
 PORT = int(os.environ.get("MINISTACK_PORT", "14566"))
 ENDPOINT = f"http://127.0.0.1:{PORT}"

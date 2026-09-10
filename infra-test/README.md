@@ -50,13 +50,13 @@ value has a default, so a clean checkout needs no file at all.
 
 ## Two things it will not do
 
-**It does not take port 4566.** The shared `dev-services` stack runs an emulator
-of its own there, that emulator belongs to whoever started it, and a suite that
+**It doesn't take port 4566.** That's MiniStack's default, so another emulator
+may already be running there, it belongs to whoever started it, and a suite that
 resets somebody else's emulator between cases is a suite that deletes their
 work. This one is on **14566**, in its own compose project, under its own
 container name.
 
-**It does not persist.** `PERSISTENCE=0`, a tmpfs, and `down` takes the volumes
+**It doesn't persist.** `PERSISTENCE=0`, a tmpfs, and `down` takes the volumes
 with it — because a test that passes because of what the last run left behind is
 worse than a slow suite.
 
@@ -85,7 +85,7 @@ reason for an emulator rather than a mock.
 
 Discovered rather than listed: `backsight.engine.runner.invocations` walks the
 package and reports every argument list handed to the engine, and a test fails
-the build if the matrix below does not cover all of them.
+the build if the matrix below doesn't cover all of them.
 
 | Invocation | Where |
 |---|---|
@@ -123,7 +123,7 @@ the build if the matrix below does not cover all of them.
 ## What it does **not** run, and why
 
 A reader comparing this against Terraform's own command list needs to know these
-are absent because the application does not run them — not because nobody got
+are absent because the application doesn't run them — not because nobody got
 round to testing them.
 
 | Command | Why there is nothing to test |
