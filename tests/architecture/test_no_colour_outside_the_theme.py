@@ -1,6 +1,6 @@
 """Colour lives in one module, and this is what keeps it there.
 
-Sheet 3: a hex code written into widget construction is the thing that makes
+A hex code written into widget construction is the thing that makes
 theming expensive later. It is cheap to prevent and a week to undo, so it is a
 build failure rather than a convention.
 """

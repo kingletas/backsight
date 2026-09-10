@@ -1,4 +1,4 @@
-"""Sheet 9's baseline, line by line.
+"""The editing baseline, line by line.
 
 None of it is novel and all of it is required. The property that matters
 throughout: everything outside the span comes back untouched.

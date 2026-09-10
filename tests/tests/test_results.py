@@ -34,7 +34,7 @@ def test_each_run_carries_its_own_result(results):
 
 
 def test_a_failure_shows_what_the_expressions_actually_were(results):
-    """FR-TST-03, and the single behaviour sheet 7 says decides adoption.
+    """FR-TST-03, and the single behaviour the design says decides adoption.
 
     The engine's JSON carries it; only the human-readable output does not.
     """

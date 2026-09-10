@@ -8,7 +8,7 @@ BRD FR-SCH-06, one of the five differentiators:
 
 > **Force-replacement is surfaced at authoring time.** The schema declares which attributes are `ForceNew`. The author sees it as they type, not in a plan twenty minutes later.
 
-Design plate 01 draws it against `aws_instance.instance_type`. The schema index took it as its acceptance test, with the note that if the parse is wrong the headline feature is wrong.
+The design's first mock-up draws it against `aws_instance.instance_type`. The schema index took it as its acceptance test, with the note that if the parse is wrong the headline feature is wrong.
 
 ## What the schema actually contains
 
@@ -53,7 +53,7 @@ That is `fixtures/plan/replace.json`, and it is exactly the "in a plan twenty mi
 
 > Updates to this field will trigger a stop/start of the EC2 instance.
 
-It is an in-place update. So plate 01's annotation, and the schema index's acceptance test, both assert something untrue about the resource they chose to demonstrate it on. It probably was ForceNew years ago; it isn't now.
+It is an in-place update. So the mock-up's annotation, and the schema index's acceptance test, both assert something untrue about the resource they chose to demonstrate it on. It probably was ForceNew years ago; it isn't now.
 
 ## What this leaves
 

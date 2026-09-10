@@ -1,6 +1,6 @@
 """The last screen before production changes, and what it is allowed to say.
 
-Plate 06 and FR-SEC-05. This is the one moment where friction is the feature, so
+FR-SEC-05. This is the one moment where friction is the feature, so
 everything destructive is stated in plain words before the button is reachable —
 including in the button's own label, which is the last warning anybody reads.
 

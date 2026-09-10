@@ -1,4 +1,4 @@
-"""Sheet 12's invariant: nothing can be hidden in a way that traps you.
+"""The invariant: nothing can be hidden in a way that traps you.
 
 Configurability is added one setting at a time, and the fifth one is where
 somebody ships a combination that leaves a panel whose only toggle lived inside
@@ -26,7 +26,7 @@ def keymap():
 
 
 def test_with_everything_hidden_every_panel_is_still_reachable_two_ways(keymap):
-    """The test sheet 12 asks for, run against the state it warns about."""
+    """The test the design asks for, run against the state it warns about."""
     layout = Layout.default()
     layout.hide_everything()
     for panel in PANELS:
@@ -75,7 +75,7 @@ def test_the_primary_menu_is_always_there():
 
 
 def test_hiding_the_last_browsable_surface_is_refused():
-    """Sheet 12: hiding the last one is refused, not permitted with a warning."""
+    """Hiding the last one is refused, not permitted with a warning."""
     layout = Layout.default()
     with pytest.raises(LastBrowsableSurface, match="last surface that can be browsed"):
         layout.set("hamburger", Visibility.HIDDEN)

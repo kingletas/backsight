@@ -4,7 +4,7 @@ Measured against GTK 4.14 and libadwaita 1.5.0.
 
 ## GTK CSS has no dotted underline
 
-Sheet 5 marks a clickable status segment with a dotted underline — the
+The design marks a clickable status segment with a dotted underline — the
 convention that says *this reacts, but it is not a link*. GTK's CSS parser
 rejects both spellings:
 

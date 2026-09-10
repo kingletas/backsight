@@ -13,7 +13,7 @@ and the file is the smallest unit the engine will accept.
 
 ## What this changes
 
-Sheet 7 asks for a gutter mark on each `run` block, clickable to re-run. The
+The design asks for a gutter mark on each `run` block, clickable to re-run. The
 mark is fine — the shape and the last result belong to the run. **The click
 cannot mean what it looks like it means.** Clicking the mark beside
 `names_are_wrong_on_purpose` runs the whole of `nodes.tftest.hcl`, including

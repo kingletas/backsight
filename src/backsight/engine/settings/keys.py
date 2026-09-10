@@ -1,6 +1,6 @@
 """What every key does, as data rather than as code.
 
-`⌘` in the design sheets is the primary modifier, and on Linux that is Ctrl.
+`⌘` in the design is the primary modifier, and on Linux that is Ctrl.
 Super belongs to the desktop shell — a stock GNOME already owns `Super+P`,
 `Super+D`, `Super+S` and `Super+M`, which are go-to-file, the plan drawer, save
 and the menu bar. Binding those would ship four dead keys.

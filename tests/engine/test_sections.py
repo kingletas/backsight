@@ -1,4 +1,4 @@
-"""Sheet 3: the panel must not contradict its own headline."""
+"""The panel must not contradict its own headline."""
 
 from __future__ import annotations
 

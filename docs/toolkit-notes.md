@@ -73,7 +73,7 @@ Whoever picks this up: try running the smoke against a real display rather than 
 
 **`Adw.TabPage` is a `GObject`, not a `Gtk.Widget`.** It can't take a CSS class, so a tab can't have coloured edges, a coloured background or any per-tab styling. What it has is `icon`, `indicator-icon`, `title`, `tooltip` and `needs-attention`.
 
-Sheet 10's anatomy — git on the left edge, plan impact along the bottom, unsaved on the right — isn't reachable through `Adw.TabBar`. Everything it wants to *say* fits in two icon slots and a title; the geometry doesn't. Buying the edges means writing a tab bar, which costs drag-to-reorder, drag-out-to-split, the overflow behaviour and `Adw.TabOverview`. That is a decision rather than a task.
+The design's tab anatomy — git on the left edge, plan impact along the bottom, unsaved on the right — isn't reachable through `Adw.TabBar`. Everything it wants to *say* fits in two icon slots and a title; the geometry doesn't. Buying the edges means writing a tab bar, which costs drag-to-reorder, drag-out-to-split, the overflow behaviour and `Adw.TabOverview`. That is a decision rather than a task.
 
 **`Gtk.TextBuffer.get_selection_bounds()` returns an empty tuple when nothing is selected**, and a `(start, end)` pair when something is. There is no found flag, unlike almost every other multiple-return in this API — unpacking it as three values raises `not enough values to unpack (expected 3, got 0)` on the ordinary case of a cursor with no selection.
 

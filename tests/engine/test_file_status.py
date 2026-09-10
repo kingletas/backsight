@@ -53,7 +53,7 @@ def workspace(tmp_path):
 
 
 def test_one_destroy_outranks_nine_creates():
-    """Sheet 10: ordered by consequence, not by count."""
+    """Ordered by consequence, not by count."""
     assert highest([Impact.CREATE] * 9 + [Impact.DESTROY]) is Impact.DESTROY
 
 
@@ -219,7 +219,7 @@ def test_a_failed_refresh_keeps_the_previous_answer_and_marks_it_stale(tmp_path)
 
 
 def test_every_git_state_has_a_letter_for_anyone_who_cannot_use_hue():
-    """Sheet 10: letters mode is a setting, not a hidden accessibility flag."""
+    """Letters mode is a setting, not a hidden accessibility flag."""
     for state in (Vcs.CONFLICTED, Vcs.DELETED, Vcs.MODIFIED, Vcs.UNTRACKED):
         assert state.letter
     assert Vcs.UNCHANGED.letter == ""

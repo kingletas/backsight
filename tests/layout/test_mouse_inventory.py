@@ -1,4 +1,4 @@
-"""Sheet 5: an empty cell in the mouse inventory is a design gap."""
+"""An empty cell in the mouse inventory is a design gap."""
 
 from __future__ import annotations
 

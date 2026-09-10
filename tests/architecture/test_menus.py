@@ -1,6 +1,6 @@
 """The menu is one owned specification, and this is what owns it.
 
-Sheet 6: the reference menu this was drawn against has "Rename…" twice, "Copy
+The reference menu this was drawn against has "Rename…" twice, "Copy
 Path" twice, and both "Delete File" and "Delete", because plugins append to a
 menu nobody owns. A duplicate entry should be a build failure rather than
 something a user reports two years later.
@@ -51,7 +51,7 @@ TAB_ACTIONS = {
     "sort-tabs-plan-impact",
 }
 
-# Sheet 6's context menus. Each is an operation the window will implement; a
+# The context menus. Each is an operation the window will implement; a
 # name here is a commitment, which is why they are listed rather than
 # discovered.
 CONTEXT_ACTIONS = {
@@ -182,7 +182,7 @@ def menu(request) -> Menu:
 
 
 def test_no_two_items_a_user_sees_together_share_a_label(menu):
-    """The exact defect sheet 6 names, checked where it can actually confuse.
+    """The exact defect a menu nobody owns has, checked where it can actually confuse.
 
     Per level, not flattened: `Copy path › Name` and `Sort tabs by › Name` are
     never seen side by side, and the parent says which is which.
@@ -304,7 +304,7 @@ def test_no_top_level_label_appears_twice_anywhere_in_the_bar():
     """One concept, one item — across the whole bar, not only within a menu.
 
     This caught three in the first draft of the specification, which is the
-    same defect sheet 6 describes in the menu it was written against.
+    same defect the reference menu it was written against has.
     """
     labels = [
         item.label for menu in MENU_BAR for section in menu.sections for item in section.items
@@ -314,7 +314,7 @@ def test_no_top_level_label_appears_twice_anywhere_in_the_bar():
 
 
 def test_the_tab_menu_has_one_close_rather_than_eight():
-    """Sheet 8: scope and filter are two axes; the reference multiplies them out."""
+    """Scope and filter are two axes; the reference multiplies them out."""
     from backsight.engine.layout.menus import TAB_MENU
 
     top_level = [item.label for section in TAB_MENU.sections for item in section.items]

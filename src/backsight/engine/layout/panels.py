@@ -211,7 +211,7 @@ class Layout:
         return self.visibility(name)
 
     def hide_everything(self) -> None:
-        """What plate 42 does. The refusal keeps one browsable surface alive."""
+        """Everything off at once. The refusal keeps one browsable surface alive."""
         for panel in PANELS:
             try:
                 self.set(panel.name, Visibility.HIDDEN)

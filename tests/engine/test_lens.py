@@ -1,4 +1,4 @@
-"""Sheet 11's code lens: three facts, and never a guessed one."""
+"""The code lens: three facts, and never a guessed one."""
 
 from __future__ import annotations
 

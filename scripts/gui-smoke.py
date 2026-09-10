@@ -318,7 +318,7 @@ def main() -> int:
     )
     snapshot(window, IMAGES / "06-plan.png")
 
-    # Sheet 11: the drawer's four tabs, and sheet 4's rule that Escape closes it.
+    # The drawer's tabs, and the rule that Escape closes it.
     window.show_panel("plan_drawer")
     pump(0.4)
     check(
@@ -342,7 +342,7 @@ def main() -> int:
     window.show_panel("plan_drawer")
     pump(0.2)
 
-    # Sheet 4: the change map replaces the minimap slot. It shows where the
+    # The change map replaces the minimap slot. It shows where the
     # plan touches this file, which a thumbnail of the text cannot.
     page = window._files_open.current
     check("the map is off until asked for", not page.change_map.get_visible())
@@ -378,7 +378,7 @@ def main() -> int:
     window._switcher.popdown()
     pump(0.3)
 
-    # Sheet 11, plate 40: everything on at once. The point is that it does not
+    # Everything on at once. The point is that it does not
     # collapse under its own weight.
     window._files_open.set_lens_shown(True)
     window._files_open.set_hints_shown(True)
@@ -391,7 +391,7 @@ def main() -> int:
     window._files_open.set_hints_shown(False)
     pump(0.3)
 
-    # Sheet 9's find row, over the file in front of it.
+    # The find row, over the file in front of it.
     window.activate_action("win.find", None)
     pump(0.4)
     check("find opens over the file", window._find.get_visible())
@@ -403,7 +403,7 @@ def main() -> int:
     pump(0.3)
     check("escape puts it away", not window._find.get_visible())
 
-    # Sheet 11: the code lens is off by default, and says three facts when on.
+    # The code lens is off by default, and says three facts when on.
     page = window._files_open.current
     check("the lens is off until asked for", not page.show_lens)
     window._files_open.set_lens_shown(True)
@@ -418,7 +418,7 @@ def main() -> int:
     window._files_open.set_lens_shown(False)
     pump(0.3)
 
-    # Sheet 7: hints are off until asked for, and then they land on the line
+    # Hints are off until asked for, and then they land on the line
     # that expands. This workspace has none, so the check is that turning them
     # on changes nothing rather than breaking anything.
     window._files_open.set_hints_shown(True)
@@ -462,9 +462,9 @@ def main() -> int:
     )
     snapshot(window, IMAGES / "16-console.png")
 
-    # Sheet 11's argument: the parts that survive to plate 42 are the status
-    # line, the gutter marks and the tab edges. Turn everything else off and
-    # check they are all still there and still true.
+    # The parts that must survive everything being turned off are the status
+    # line, the gutter marks and the tab edges. Turn the rest off and check
+    # they are all still there and still true.
     check("the verdict line carries the plan", listed(window, "＋2"))
     # It asserted a hardcoded sentence, which passed for as long as the status
     # bar carried one. What it was guarding is that the status line and the
@@ -537,7 +537,7 @@ def main() -> int:
             w.close()
     pump(0.3)
 
-    # Sheet 10: a tab says what git thinks and what the plan will do, in two
+    # A tab says what git thinks and what the plan will do, in two
     # slots that never disturb each other.
     from backsight.engine.insight.file_status import Impact  # noqa: PLC0415
 
@@ -563,7 +563,7 @@ def main() -> int:
     page.buffer.undo()
     pump(0.2)
 
-    # Sheet 12, driven rather than described: hide a panel, check it went, and
+    # Getting back, driven rather than described: hide a panel, check it went, and
     # check every path back still exists.
     from backsight.engine.layout.panels import PANELS, restore_paths  # noqa: PLC0415
 
@@ -617,7 +617,7 @@ def main() -> int:
             w.close()
     pump(0.3)
 
-    # The same screen in both schemes. Sheet 3 asks for both, and a light editor
+    # The same screen in both schemes. The design asks for both, and a light editor
     # on a dark window is the failure the pairing exists to stop.
     manager = Adw.StyleManager.get_default()
     for scheme, shot in (
@@ -676,7 +676,7 @@ def main() -> int:
     )
     if missing:
         check(f"every view painted (missing: {', '.join(missing)})", False)
-    # Sheet 4: the palette is the surface everything else is reached through,
+    # The palette is the surface everything else is reached through,
     # so it never opens empty and every prefix searches its own source.
     entries = window._palette_entries()
     suggestions = window._palette_suggestions()
@@ -750,7 +750,7 @@ def main() -> int:
     opened.close()
     pump(0.3)
 
-    # Sheet 5: middle-click closes the tab under the pointer. The bar offers
+    # Middle-click closes the tab under the pointer. The bar offers
     # no hit-test, so this is the only place the mapping is proved right.
     from backsight.app.editor import _tab_under, _tab_widgets  # noqa: PLC0415
 
@@ -1011,7 +1011,7 @@ def main() -> int:
 
     # Last, because it opens a different workspace: every check above is
     # written against the one the smoke opened at the start.
-    # Sheet 7: a test file shows the shape of its runs before anything has run,
+    # A test file shows the shape of its runs before anything has run,
     # and each mark carries its own result afterwards.
     window.open_workspace(ROOT / "fixtures" / "tests" / "workspace")
     pump(0.4)

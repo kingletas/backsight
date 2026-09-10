@@ -1,8 +1,8 @@
 # Finding 003 — the test framework's missing values are already in the JSON
 
-**Good news, and it makes sheet 7 much cheaper than it assumes.**
+**Good news, and it makes the test runner much cheaper than the design assumed.**
 
-## What sheet 7 says
+## What the design says
 
 > Terraform's test framework has existed since 1.6 and adoption is poor. The reason is not that engineers dislike testing infrastructure — it's that mocks prove little, real runs cost money, and **a failure prints "assertion failed" with no values**.
 
@@ -23,7 +23,7 @@ That is true of the **human-readable** output and false of `-json`. A failing as
 
 Captured from `tofu test -json` against `fixtures/tests/workspace`, and committed as `fixtures/tests/run-with-a-failure.jsonl`.
 
-**So FR-TST-03 is a presentation problem rather than a data one.** The differentiator sheet 7 builds its case on costs a reader and a panel, not an evaluator. That is a large reduction: the alternative would have meant evaluating HCL expressions ourselves against plan state, which is most of a language runtime.
+**So FR-TST-03 is a presentation problem rather than a data one.** The differentiator the design builds its case on costs a reader and a panel, not an evaluator. That is a large reduction: the alternative would have meant evaluating HCL expressions ourselves against plan state, which is most of a language runtime.
 
 ## The trap that came with it
 
@@ -42,7 +42,7 @@ Captured from `tofu test -json` against `fixtures/tests/workspace`, and committe
 | | Before | After |
 |---|---|---|
 | FR-TST-03 | Assumed to need our own expression evaluator | A reader over the engine's JSON |
-| Sequencing | Sheet 7 argues it should follow convergence | Still right, and cheaper than argued |
+| Sequencing | The design argues it should follow convergence | Still right, and cheaper than argued |
 | FR-DBG-01 | A console evaluating arbitrary expressions | Still ours. `tofu console` exists and is a separate integration |
 
-**Sheet 7's sequencing argument stands and gets stronger.** The test runner is mostly a view over machinery that already exists.
+**The design's sequencing argument stands and gets stronger.** The test runner is mostly a view over machinery that already exists.

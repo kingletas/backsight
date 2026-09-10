@@ -1,6 +1,6 @@
 # Spike 001 — can GtkSourceView carry a line-anchored verdict?
 
-**Question.** BRD OQ-6, named as the largest technical unknown in P1. FR-ED-05 wants a finding rendered against the line of HCL that caused it, in the density plate 01 shows. Can GtkSourceView 5 do that, or does the editor need a custom text widget?
+**Question.** BRD OQ-6, named as the largest technical unknown in P1. FR-ED-05 wants a finding rendered against the line of HCL that caused it, in the density the design's first mock-up shows. Can GtkSourceView 5 do that, or does the editor need a custom text widget?
 
 **Answer.** GtkSourceView is sufficient, using `Gtk.TextView`'s own overlay mechanism. No custom widget. **Confidence: high for the mechanism, medium for the density**, and what would change my mind is at the bottom.
 

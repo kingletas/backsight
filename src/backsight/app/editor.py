@@ -509,7 +509,7 @@ class Editor(Adw.Bin):
         """Hangs each verdict on the line of the file it belongs to.
 
         The gutter mark and the band are separate layers on purpose. Turning the
-        bands off leaves the marks, which is plate 42.
+        bands off leaves the marks, which is what survives when everything else is off.
         """
         from backsight.engine.insight.verdicts import in_file  # noqa: PLC0415
 

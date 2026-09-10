@@ -48,7 +48,7 @@ def test_the_narrowest_layer_wins_outright():
 
 
 def test_explain_shows_the_winner_and_the_losers():
-    """Sheet 9: "why is my setting not applying" is otherwise unanswerable."""
+    """Without this, "why is my setting not applying" has no answer."""
     settings = Settings(
         layers={
             "default": {"terraform.format_on_save": False},
@@ -148,7 +148,7 @@ def test_binding_something_that_does_not_exist_is_refused():
 
 
 def test_two_commands_on_one_key_are_reported_and_not_silently_resolved():
-    """Sheet 9, FR-APP-27. Load order deciding it makes the cause invisible."""
+    """FR-APP-27. Load order deciding it makes the cause invisible."""
     keymap = Keymap.build({"toggle-console": "<Control>p"})
     conflicts = keymap.conflicts()
     assert len(conflicts) == 1

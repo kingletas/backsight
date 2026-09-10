@@ -1,4 +1,4 @@
-"""Sheet 6: inapplicable sections vanish, blocked items stay and say why."""
+"""Inapplicable sections vanish, blocked items stay and say why."""
 
 from __future__ import annotations
 

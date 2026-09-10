@@ -24,7 +24,7 @@ can't say the name *works*, and every one of the 113 passed it.
 
 Four annotation toggles — gutter verdicts, inline explanations, code lens,
 resolved values — sat in the View menu wired to nothing at all. Choosing one
-did nothing, silently, and sheet 9 specifies that each layer toggles
+did nothing, silently, and the design specifies that each layer toggles
 independently.
 
 ## Two different problems inside the 113

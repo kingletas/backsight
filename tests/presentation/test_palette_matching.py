@@ -1,4 +1,4 @@
-"""Sheet 4: the palette opens with suggestions and never an empty prompt."""
+"""The palette opens with suggestions and never an empty prompt."""
 
 from __future__ import annotations
 

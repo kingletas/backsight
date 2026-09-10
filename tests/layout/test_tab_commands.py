@@ -1,4 +1,4 @@
-"""Sheet 8: scope and filter are two axes, and the cost is named once."""
+"""Scope and filter are two axes, and the cost is named once."""
 
 from pathlib import Path
 

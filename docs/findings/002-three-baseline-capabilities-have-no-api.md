@@ -14,7 +14,7 @@ instead of implying an editing mode behind it.
 
 Original finding follows.
 
-**Status when written: needs a decision.** Sheet 9 states the baseline checklist exists as one requirement *"so an implementer cannot treat it as optional polish"*. Three of its items can't be built on GtkSourceView 5 at all, and saying so is better than quietly shipping nine tenths of a row.
+**Status when written: needs a decision.** The design states the baseline checklist exists as one requirement *"so an implementer cannot treat it as optional polish"*. Three of its items can't be built on GtkSourceView 5 at all, and saying so is better than quietly shipping nine tenths of a row.
 
 ## What is there, and it is most of it
 
@@ -56,4 +56,4 @@ Verified against GtkSourceView 5.12 and GTK 4.14 on this machine.
 1. **Accept the gap for v1** and record it in the README's "not built yet", where the prototype framing already lives.
 2. **Reconsider the toolkit for the editor** — an embedded editor component with these built in. §9.1 rules out anything with a browser engine, which removes Monaco and CodeMirror, so this likely means a custom widget. Sheet OQ-6 asked whether GtkSourceView was sufficient and the answer in the first spike was yes *for the annotation density*. This is the other half of that question, and it has a different answer.
 
-**Nothing about this blocks the rest of sheet 9.** The menu bar, the settings dialog and the settings precedence chain are unaffected.
+**Nothing about this blocks the rest of the baseline.** The menu bar, the settings dialog and the settings precedence chain are unaffected.
