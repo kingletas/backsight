@@ -1,0 +1,8 @@
+main.tf
+--- old/main.tf
++++ new/main.tf
+@@ -1,3 +1,3 @@
+ resource "terraform_data" "a" {
+-    input   =    "x"
++  input = "x"
+ }

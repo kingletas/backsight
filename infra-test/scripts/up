@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+#
+# Starts the integration emulator and waits until it says it is ready.
+#
+# Usage:   infra-test/scripts/up
+#
+# Environment overrides:
+#   MINISTACK_PORT     what to publish on (default 14566, never 4566)
+#   MINISTACK_VERSION  which emulator build (default 1.5.8, pinned)
+#
+# It is idempotent: run it twice and the second run waits on the container the
+# first one started.
+set -euo pipefail
+
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+"${here}/scripts/wait" --start

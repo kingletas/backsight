@@ -1,0 +1,11 @@
+{
+  "description": "A rename of something another resource refers to",
+  "kind": "rename",
+  "expect": "no-op",
+  "moved": [
+    {
+      "from": "terraform_data.api",
+      "to": "terraform_data.api_gateway"
+    }
+  ]
+}

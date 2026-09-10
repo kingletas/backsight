@@ -1,0 +1,11 @@
+{
+  "description": "A rename inside a called module",
+  "kind": "rename",
+  "expect": "no-op",
+  "moved": [
+    {
+      "from": "terraform_data.api",
+      "to": "terraform_data.api_gateway"
+    }
+  ]
+}

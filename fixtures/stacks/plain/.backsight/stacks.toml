@@ -1,0 +1,35 @@
+# An invented estate. No account here is real and no role exists.
+
+[stacks.network]
+path = "infra/network"
+engine = "tofu"
+version = "1.12"
+backend = "s3"
+environment = "prod"
+account = "000000000001"
+region = "eu-west-1"
+role = "arn:aws:iam::000000000001:role/invented-deploy"
+outputs = ["vpc_id", "private_subnets", "public_subnets"]
+
+[stacks.data]
+path = "infra/data"
+environment = "prod"
+account = "000000000001"
+region = "eu-west-1"
+outputs = ["database_endpoint"]
+needs = { network = ["vpc_id", "private_subnets"] }
+
+[stacks.api]
+path = "infra/api"
+environment = "prod"
+account = "000000000001"
+region = "eu-west-1"
+outputs = ["api_url"]
+needs = { network = ["private_subnets"], data = ["database_endpoint"] }
+
+[stacks.edge]
+path = "infra/edge"
+environment = "prod"
+account = "000000000001"
+region = "eu-west-1"
+needs = { api = ["api_url"] }

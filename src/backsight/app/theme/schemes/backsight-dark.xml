@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Generated from backsight/app/theme/tokens.py. Do not edit.
+  Regenerate with: python -m backsight.app.theme.schemes
+
+  The one thing to keep: block-title is the resource *type* and
+  block-label is its *name*. They are different things and must not
+  share a colour.
+-->
+<style-scheme id="backsight-dark" name="Backsight Dark" version="1.0">
+  <author>Backsight</author>
+  <description>Generated from the design tokens — dark.</description>
+
+  <color name="bg" value="#201F1D"/>
+  <color name="fg" value="#EFEDE7"/>
+  <color name="dim" value="#918D84"/>
+  <color name="selection" value="#213140"/>
+  <color name="line" value="#2B2A28"/>
+  <color name="bracket" value="#2A435C"/>
+  <color name="block" value="#C99BDD"/>
+  <color name="type" value="#8CBCEC"/>
+  <color name="name" value="#67C9A5"/>
+  <color name="attr" value="#B8B4AA"/>
+  <color name="string" value="#E0A56A"/>
+  <color name="number" value="#6FC4D4"/>
+  <color name="fn" value="#A79BEE"/>
+  <color name="ref" value="#8CBCEC"/>
+  <color name="interp" value="#EE9070"/>
+  <color name="comment" value="#918D84"/>
+  <color name="operator" value="#ADA99F"/>
+  <color name="invalid" value="#F4BABA"/>
+  <color name="create" value="#8CBC52"/>
+  <color name="update" value="#DE981F"/>
+  <color name="replace" value="#E97C4C"/>
+  <color name="destroy" value="#E56E6D"/>
+
+  <!-- Canvas -->
+  <style name="text"                 foreground="fg" background="bg"/>
+  <style name="selection"            background="selection"/>
+  <style name="current-line"         background="line"/>
+  <style name="search-match"         background="selection" foreground="fg"/>
+  <!-- A tinted fill rather than a box: a box adds two more vertical
+       lines to a screen already full of them. -->
+  <style name="bracket-match"        background="bracket"/>
+  <style name="bracket-mismatch"     foreground="invalid" bold="true"/>
+  <style name="cursor"               foreground="fg"/>
+  <style name="line-numbers"         foreground="dim" background="bg"/>
+  <!-- The caret line's own number goes to full ink. With the wash
+       above it, that is how somebody finds the caret after looking
+       away, and it costs nothing to draw. -->
+  <style name="current-line-number"  foreground="fg" background="line" bold="true"/>
+  <style name="right-margin"         foreground="dim" background="dim"/>
+  <style name="draw-spaces"          foreground="dim"/>
+  <style name="background-pattern"   background="line"/>
+
+  <!-- Syntax -->
+  <style name="def:keyword"          foreground="block" bold="true"/>
+  <style name="def:type"             foreground="type"/>
+  <style name="def:string"           foreground="string"/>
+  <style name="def:number"           foreground="number"/>
+  <style name="def:boolean"          foreground="number"/>
+  <style name="def:constant"         foreground="number"/>
+  <style name="def:special-constant" foreground="ref"/>
+  <style name="def:comment"          foreground="comment" italic="true"/>
+  <style name="def:function"         foreground="fn"/>
+  <style name="def:identifier"       foreground="attr"/>
+  <style name="def:special-char"     foreground="interp"/>
+  <style name="def:operator"         foreground="operator"/>
+  <style name="def:error"            foreground="invalid" bold="true"/>
+  <style name="def:note"             foreground="update" bold="true"/>
+  <style name="def:preprocessor"     foreground="block"/>
+  <style name="def:statement"        foreground="block"/>
+  <style name="def:strong-emphasis"  foreground="block" bold="true"/>
+
+  <!-- HCL. Three colours on one line, because `resource`, the
+       provider's `aws_instance` and your own `api` are three
+       different kinds of thing. -->
+  <style name="terraform:block-type"       foreground="block" bold="true"/>
+  <style name="terraform:block-title"      foreground="type"/>
+  <style name="terraform:block-label"      foreground="name"/>
+  <style name="terraform:keyword"          foreground="block" bold="true"/>
+  <style name="terraform:statement"        foreground="block"/>
+  <!-- An attribute name, on the left of an `=` and after a `.`. -->
+  <style name="terraform:identifier"       foreground="attr"/>
+  <style name="terraform:reference"        foreground="ref"/>
+  <style name="terraform:builtin-function" foreground="fn"/>
+  <style name="terraform:data-type"        foreground="type"/>
+  <style name="terraform:string"           foreground="string"/>
+  <style name="terraform:number"           foreground="number"/>
+  <style name="terraform:boolean"          foreground="number"/>
+  <style name="terraform:null"             foreground="number"/>
+  <style name="terraform:comment"          foreground="comment" italic="true"/>
+  <!-- The delimiters are marked; what is inside them is an
+       expression and keeps the colours an expression has. -->
+  <style name="terraform:interpolation"    foreground="interp" bold="true"/>
+  <style name="terraform:interpolated"     foreground="fg"/>
+  <style name="terraform:escaped-character" foreground="interp"/>
+  <style name="terraform:error"            foreground="invalid" bold="true"/>
+
+  <!-- Diff, here so it cannot drift from the syntax palette. -->
+  <style name="diff:added-line"      foreground="create"/>
+  <style name="diff:removed-line"    foreground="destroy"/>
+  <style name="diff:changed-line"    foreground="update"/>
+  <style name="diff:location"        foreground="dim"/>
+</style-scheme>

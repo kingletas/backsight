@@ -1,0 +1,20 @@
+# Every kind of thing that can be wrong, in one file.
+
+[stacks.good]
+path = "good"
+outputs = ["published"]
+
+[stacks.no_path]
+environment = "prod"
+
+[stacks.wants_a_ghost]
+path = "ghost"
+needs = { missing = ["anything"] }
+
+[stacks.wants_a_private_output]
+path = "private"
+needs = { good = ["published", "not_published"] }
+
+[stacks.needs_itself]
+path = "itself"
+needs = { needs_itself = [] }

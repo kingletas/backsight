@@ -1,0 +1,15 @@
+{
+  "description": "Two resources lifted into a module of their own",
+  "kind": "extract",
+  "expect": "no-op",
+  "moved": [
+    {
+      "from": "terraform_data.api",
+      "to": "module.services.terraform_data.api"
+    },
+    {
+      "from": "terraform_data.worker",
+      "to": "module.services.terraform_data.worker"
+    }
+  ]
+}

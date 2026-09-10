@@ -1,0 +1,13 @@
+{
+  "description": "The subnet is not in this configuration, so reachability cannot be decided",
+  "partial": true,
+  "note": "FR-EXP-08: a silent false negative is worse than a false positive.",
+  "verified_by": null,
+  "expects": [
+    {
+      "resource": "aws_network_interface.db",
+      "exposed": null,
+      "why": "the subnet is outside this configuration, so nothing here can say whether it routes"
+    }
+  ]
+}

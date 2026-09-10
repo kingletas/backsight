@@ -1,0 +1,9 @@
+
+Error: Reference to undeclared input variable
+
+  on <console-input> line 1:
+  (source code not available)
+
+An input variable with the name "nope" has not been declared. This variable
+can be declared with a variable "nope" {} block.
+

@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+#
+# The whole integration run, from a clean checkout: start the emulator, wait
+# for it, run the suite, and take the stack down whatever happened.
+#
+# Usage:   infra-test/scripts/test [pytest arguments...]
+#
+# Environment overrides:
+#   MINISTACK_PORT   default 14566
+#   KEEP_UP          1 leaves the emulator running, for looking at afterwards
+#
+# **Cleanup runs on every ending** — success, an assertion, a crash, Ctrl-C or
+# a timeout — because a suite that leaves a container behind on failure is one
+# whose next run is about the last one.
+set -euo pipefail
+
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+root="$(cd "${here}/.." && pwd)"
+
+finish() {
+  local status=$?
+  if [[ $status -ne 0 ]]; then
+    printf '\n--- the emulator logs, because something failed ---\n' >&2
+    docker compose -f "${here}/docker-compose.yml" logs --tail 200 >&2 || true
+  fi
+  if [[ "${KEEP_UP:-0}" != "1" ]]; then
+    "${here}/scripts/down" >/dev/null 2>&1 || true
+  fi
+  exit $status
+}
+trap finish EXIT INT TERM
+
+"${here}/scripts/up"
+cd "$root"
+# Only this directory: collecting the whole suite imports the window tests,
+# which need a desktop toolkit this job has no reason to install.
+uv run pytest -q -m integration tests/integration "$@"

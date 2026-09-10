@@ -1,0 +1,19 @@
+# Three stacks that need each other in a loop.
+
+[stacks.one]
+path = "one"
+outputs = ["a"]
+needs = { three = ["c"] }
+
+[stacks.two]
+path = "two"
+outputs = ["b"]
+needs = { one = ["a"] }
+
+[stacks.three]
+path = "three"
+outputs = ["c"]
+needs = { two = ["b"] }
+
+[stacks.alone]
+path = "alone"

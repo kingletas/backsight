@@ -1,0 +1,175 @@
+{
+  "versions": [
+    {
+      "version": "2.9.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.8.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.7.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.6.2",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.6.1",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.6.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.5.3",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.5.3-alpha1",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.5.2",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.5.1",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.5.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.4.1",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.4.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.3.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.2.3",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.2.2",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.2.1",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.2.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.1.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "2.0.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "1.4.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "1.3.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "1.2.2",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "1.2.1",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "1.2.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "1.1.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "1.0.0",
+      "protocols": [
+        "5.0"
+      ]
+    },
+    {
+      "version": "0.1.0",
+      "protocols": [
+        "5.0"
+      ]
+    }
+  ],
+  "warnings": [
+    "You are using opentofu/local instead of hashicorp/local. This provider is maintained by HashiCorp and the OpenTofu project only builds the provider binaries from the source code. Both the opentofu/ and hashicorp/ namespaces in the OpenTofu Registry contain the OpenTofu-built provider binaries based on the HashiCorp source code. To avoid configuration errors, we recommend using the hashicorp/ namespaced providers."
+  ]
+}

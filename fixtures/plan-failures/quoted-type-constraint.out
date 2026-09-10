@@ -1,0 +1,10 @@
+
+Error: Invalid quoted type constraints
+
+  on main.tf line 2, in variable "tags":
+   2:   type = "map"
+
+OpenTofu 0.11 and earlier required type constraints to be given in quotes,
+but that form is now deprecated and will be removed in a future version of
+OpenTofu. Remove the quotes around "map" and write map(string) instead to
+explicitly indicate that the map elements are strings.

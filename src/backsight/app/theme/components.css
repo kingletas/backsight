@@ -1,0 +1,674 @@
+/* Terraform workspace editor — component styles.
+   References the @define-color names emitted by theme/tokens.py.
+   No literal colours below this line. If a value is needed, add it to
+   tokens.py in both palettes. */
+
+/* ---------- foundations ---------- */
+
+window.tf-root {
+  font-family: "IBM Plex Sans", "Inter", Cantarell, system-ui, sans-serif;
+  /* A ratio, never a pixel count: a px font size does not follow the desktop's
+     text scaling factor, so every size in this file was deaf to it. 13px
+     against a 14.67px desktop default — see theme/tokens.py. */
+  font-size: 0.886em;
+  background-color: @tf_canvas;
+  color: @tf_ink;
+}
+
+.tf-dim      { color: @tf_ink_muted; }
+.tf-faint    { color: @tf_ink_faint; }
+.tf-medium   { font-weight: 500; }
+.tf-micro    { font-size: 0.846em; }
+.tf-small    { font-size: 0.923em; }
+.tf-strong   { font-size: 1.154em; font-weight: 500; }
+.tf-title    { font-size: 1.462em; font-weight: 500; }
+.tf-figure   { font-size: 2.0em; font-weight: 500; }
+.tf-mono     { font-family: "JetBrains Mono", "IBM Plex Mono", "Source Code Pro", ui-monospace, monospace; }
+
+/* A ring belongs to the control that has the focus. GTK sets this state on
+   the focused widget and on every ancestor of it, so a bare `*` rule draws a
+   ring around the editor, the panel and the window all at once — the app then
+   reads as though every region has the keyboard. Containers are excluded by
+   name, and `:focus-visible` rather than `:focus` keeps rings off things the
+   pointer merely landed on. */
+*:focus-visible {
+  outline: 2px solid @tf_focus_ring;
+  outline-offset: 1px;
+}
+
+window:focus-visible,
+box:focus-visible,
+grid:focus-visible,
+paned:focus-visible,
+frame:focus-visible,
+scrolledwindow:focus-visible,
+viewport:focus-visible,
+overlay:focus-visible,
+stack:focus-visible,
+revealer:focus-visible,
+headerbar:focus-visible,
+toolbarview:focus-visible,
+clamp:focus-visible,
+banner:focus-visible,
+statuspage:focus-visible,
+tabview:focus-visible,
+tabbar:focus-visible,
+notebook:focus-visible,
+listbox:focus-visible,
+list:focus-visible,
+label:focus-visible,
+image:focus-visible,
+separator:focus-visible,
+expander:focus-visible,
+popover:focus-visible,
+popover > contents:focus-visible,
+menubar:focus-visible {
+  outline: none;
+}
+
+/* ---------- structure ---------- */
+
+.tf-sidebar {
+  background-color: @tf_surface;
+  border-right: 1px solid @tf_hairline;
+}
+
+/* The filter, which is the whole of what makes the rail survive a real
+   repository. Hidden until somebody types: a search field sitting empty over a
+   tree is a row of height spent on a control nobody has reached for. */
+.tf-rail-filter {
+  background-color: @tf_sunken;
+  border-radius: 0;
+  border-bottom: 1px solid @tf_hairline;
+  min-height: 26px;
+  margin: 0;
+}
+
+/* ---------- the file tree ---------- */
+
+/* A folder is the shape of the repository and a file is a thing you open, so
+   the folder carries the weight. Both are `ink`: a tree drawn in two greys is
+   one where the reader is guessing which half is the structure. */
+.tf-tree-folder .tf-tree-name { color: @tf_ink; font-weight: 500; }
+.tf-tree-row .tf-tree-name { color: @tf_ink_muted; }
+
+/* All that is left of a collapsed rail. A mis-hit key must never lose a
+   feature outright, so there is always something to click. */
+.tf-rail-strip {
+  background-color: @tf_surface;
+  border-right: 1px solid @tf_hairline;
+  border-radius: 0;
+  padding: 6px 2px;
+  min-width: 0;
+}
+
+.tf-rail-strip:hover {
+  background-color: @tf_panel;
+}
+
+/* An apply that did not finish. The bar says how much of the plan actually
+   happened, and the colour says the rest is not coming. */
+.tf-bar-stopped > trough > progress {
+  background-color: @tf_consequence_irreversible_fill;
+}
+
+/* Which pane the keyboard is in. Only drawn while there are two — a border
+   around the only editor would be saying something with no alternative. */
+.tf-pane-active {
+  border-left: 2px solid @tf_accent_edge;
+}
+
+/* The plan, where it can grow with its content. */
+.tf-inspector {
+  background-color: @tf_surface;
+  border-left: 1px solid @tf_hairline;
+}
+
+.tf-inspector-row {
+  border-radius: 0;
+  padding: 6px 0;
+  min-height: 0;
+}
+
+.tf-inspector-row:hover {
+  background-color: @tf_panel;
+}
+
+/* The verdict line. The one strip that never leaves, and the only element in
+   this application allowed to change its own background — which it does for
+   exactly one condition, a plan that will not run. Tabular figures, because
+   Ln/Col change constantly and a jittering number is one you stop reading. */
+.tf-verdict {
+  background-color: @tf_surface;
+  border-top: 1px solid @tf_hairline;
+  color: @tf_ink_muted;
+  padding: 2px 12px;
+  min-height: 24px;
+  font-feature-settings: "tnum" 1;
+}
+
+.tf-verdict.tf-will-not-run {
+  background-color: @tf_blocked_bg;
+  border-top: 1px solid @tf_blocked_edge;
+}
+
+/* Inside a turned strip everything is read against the fill, so the quiet
+   tones stop being quiet enough to disappear into it. */
+.tf-verdict.tf-will-not-run label { color: @tf_blocked_text; }
+
+.tf-inspector {
+  background-color: @tf_surface;
+  border-left: 1px solid @tf_hairline;
+  padding: 8px 12px;
+}
+
+.tf-card {
+  background-color: @tf_panel;
+  border: 1px solid @tf_hairline;
+  border-radius: 8px;
+}
+
+/* Inset panels sit on surface, not panel, so they read as recessed rather
+   than as another card floating on a card. */
+.tf-card.tf-inset {
+  background-color: @tf_surface;
+  border-radius: 8px;
+}
+
+/* ---------- workspace tree ---------- */
+
+.tf-tree { background-color: transparent; }
+
+/* Twenty-four pixels, and no icon per row. Sixteen pixels of a name spent on
+   decoration is sixteen pixels a long filename does not get, and every level
+   of a tree costs some of the same width again. */
+.tf-tree > row {
+  padding: 0 8px 0 4px;
+  min-height: 24px;
+  border-radius: 0;
+}
+
+.tf-tree > row:hover { background-color: @tf_hover; }
+
+/* The step per level is the toolkit's, and there is no property for it —
+   `-GtkTreeExpander-indent-size` is not a thing, and asking for it printed a
+   parser warning on every start. Sixteen pixels a level, measured against a
+   tree four deep in a 240px rail, leaves enough for a filename. */
+
+/* Git state, two pixels on the left edge, where it is out of the way of the
+   name. What the plan would do is a count on the right; two edges, two facts,
+   and no extra column between them. */
+.tf-tree-row,
+.tf-tree-folder {
+  border-left: 2px solid transparent;
+  padding-left: 4px;
+  font-feature-settings: "tnum" 1;
+}
+.tf-git-changed   { border-left-color: @tf_consequence_disruptive_edge; }
+.tf-git-added     { border-left-color: @tf_consequence_safe_edge; }
+.tf-git-untracked { border-left-color: @tf_ink_ghost; }
+.tf-tree row:hover { background-color: @tf_hover; }
+/* The file you are in. Both the tint and the bar: a flat fill with no marker
+   reads as a leftover highlight rather than as where you are. */
+.tf-current {
+  background-color: @tf_accent_bg;
+  border-left-color: @tf_accent_edge;
+}
+.tf-current .tf-tree-name { color: @tf_ink; font-weight: 500; }
+
+/* No rules between rows. A separator between every one turns the column into a
+   stack of boxes. */
+.tf-sidebar .tf-tree > row { border-bottom: none; }
+.tf-tree .tf-backend { font-size: 0.846em; color: @tf_ink_faint; }
+.tf-tree .tf-drift   { font-size: 0.846em; color: @tf_consequence_disruptive_text; }
+.tf-tree .tf-nostate,
+.tf-nostate { font-size: 0.846em; color: @tf_blocked_text; }
+
+/* ---------- editor buffer ---------- */
+
+.tf-buffer {
+  background-color: @tf_panel;
+  font-family: "JetBrains Mono", "IBM Plex Mono", "Source Code Pro", ui-monospace, monospace;
+  font-size: 1.038em;
+  /* Tabular figures everywhere a number sits in a column. Without it the
+     gutter appears to shiver as it scrolls, because a 1 is narrower than a 8. */
+  font-feature-settings: "tnum" 1, "calt" 0;
+}
+.tf-buffer text selection { background-color: @tf_syn_selection; }
+
+.tf-gutter {
+  background-color: @tf_panel;
+  color: @tf_plan_noop;
+  font-size: 0.846em;
+  padding: 0 8px;
+}
+
+/* Line washes for planned changes. Kept to the row background only — the
+   text keeps its syntax colour so code stays readable inside the wash. */
+.tf-line-create  { background-color: @tf_consequence_safe_bg; }
+.tf-line-update  { background-color: @tf_consequence_disruptive_bg; }
+.tf-line-replace { background-color: @tf_consequence_disruptive_bg; }
+.tf-line-destroy { background-color: @tf_consequence_irreversible_bg; }
+.tf-line-blocked { background-color: @tf_blocked_bg; }
+
+/* The lane: the annotation at the right of the line it is about, on that
+   line's own row. Sans, not mono — it is commentary about the code, not code —
+   and quiet, because the code is what is being read. It never wraps: a wrap
+   would cost the row its fixed height, which is the one thing the lane exists
+   to protect. */
+.tf-lane {
+  font-family: "IBM Plex Sans", "Inter", Cantarell, system-ui, sans-serif;
+  font-size: 0.846em;
+  color: @tf_ink_faint;
+  padding: 0 6px;
+}
+.tf-lane.tf-disruptive   { color: @tf_consequence_disruptive_text; }
+.tf-lane.tf-irreversible { color: @tf_consequence_irreversible_text; }
+.tf-lane.tf-blocked      { color: @tf_blocked_text; }
+.tf-lane.tf-safe         { color: @tf_consequence_safe_text; }
+.tf-lane.tf-faint        { color: @tf_ink_faint; }
+
+/* ---------- consequence groups (review screen) ---------- */
+
+/* A rule down the left edge, not a box. A boxed card reads as a container of
+   equal weight to its neighbours; a rule reads as a spine, which is the same
+   visual idea the gutter uses to mean the same thing. */
+.tf-group {
+  border-left: 2px solid @tf_hairline_strong;
+  border-radius: 0;
+  background: transparent;
+}
+.tf-group.tf-safe         { border-left-color: @tf_consequence_safe_edge; }
+.tf-group.tf-disruptive   { border-left-color: @tf_consequence_disruptive_edge; }
+.tf-group.tf-irreversible { border-left-color: @tf_consequence_irreversible_edge; }
+
+.tf-group-header {
+  padding: 6px 8px;
+  font-size: 0.846em;
+  font-weight: 500;
+  border-radius: 0;
+}
+.tf-group-label {
+  letter-spacing: 0.04em;
+}
+
+.tf-group-header.tf-safe {
+  background: transparent;
+  color: @tf_consequence_safe_text;
+}
+.tf-group-header.tf-disruptive {
+  background: transparent;
+  color: @tf_consequence_disruptive_text;
+}
+/* A border and a rule, and no fill. Blocked is the only element in this
+   application allowed a full coloured background — that is the whole
+   difference between "this is dangerous" and "this will not run". */
+.tf-group-header.tf-irreversible {
+  background: transparent;
+  color: @tf_consequence_irreversible_text;
+}
+
+/* Blocked is the only element that fills its whole card. That is the
+   difference between "this is dangerous" and "this will not run". */
+.tf-blocker {
+  background-color: @tf_blocked_bg;
+  border-radius: 8px;
+  padding: 12px;
+  color: @tf_blocked_text;
+}
+.tf-blocker.tf-resolved {
+  background-color: @tf_consequence_safe_bg;
+  color: @tf_consequence_safe_text;
+}
+
+/* ---------- chips ---------- */
+
+.tf-chip {
+  font-size: 0.846em;
+  padding: 2px 6px;
+  border-radius: 999px;
+}
+.tf-chip.tf-safe {
+  background-color: @tf_consequence_safe_bg;
+  color: @tf_consequence_safe_text;
+}
+.tf-chip.tf-disruptive {
+  background-color: @tf_consequence_disruptive_bg;
+  color: @tf_consequence_disruptive_text;
+}
+.tf-chip.tf-irreversible {
+  background-color: @tf_consequence_irreversible_bg;
+  color: @tf_consequence_irreversible_text;
+}
+.tf-chip.tf-info {
+  background-color: @tf_accent_bg;
+  color: @tf_accent_text;
+}
+
+/* ---------- actions ---------- */
+
+button.tf-quiet {
+  background: transparent;
+  border: 1px solid @tf_hairline_strong;
+  border-radius: 5px;
+  color: @tf_ink;
+  padding: 4px 8px;
+  min-height: 26px;
+}
+button.tf-quiet:hover  { background-color: alpha(@tf_ink, 0.05); }
+button.tf-quiet:active { background-color: alpha(@tf_ink, 0.09); }
+
+button.tf-primary {
+  background-color: @tf_accent_fill;
+  color: @tf_ink_on_fill;
+  border: none;
+  border-radius: 5px;
+  min-height: 28px;
+  padding: 4px 12px;
+}
+button.tf-primary:hover { background-color: shade(@tf_accent_fill, 0.94); }
+
+/* Apply is neutral until the plan contains something irreversible. Colour
+   here is a property of the plan, not of the button. */
+button.tf-apply {
+  background-color: @tf_accent_fill;
+  color: @tf_ink_on_fill;
+  border: none;
+  border-radius: 5px;
+  min-height: 32px;
+  padding: 4px 16px;
+}
+/* The run control carries the plan's worst consequence. Adw.SplitButton is a
+   box of two buttons, so the class lands on the box and reaches both. */
+.tf-run.tf-irreversible > button {
+  background-color: @tf_consequence_irreversible_fill;
+  color: @tf_ink_on_fill;
+  border-color: @tf_consequence_irreversible_edge;
+}
+.tf-run.tf-irreversible > button:hover {
+  background-color: @tf_consequence_irreversible_hover;
+}
+
+button.tf-apply.tf-irreversible {
+  background-color: @tf_consequence_irreversible_fill;
+}
+button.tf-apply.tf-irreversible:hover {
+  background-color: @tf_consequence_irreversible_hover;
+}
+button.tf-apply:disabled {
+  background-color: alpha(@tf_ink, 0.10);
+  color: @tf_ink_faint;
+}
+
+/* ---------- plan freshness ---------- */
+
+.tf-plan-stale  { color: @tf_consequence_disruptive_text; }
+.tf-plan-fresh  { color: @tf_ink_faint; }
+.tf-plan-running { color: @tf_accent_text; }
+
+/* ---------- surfaces the prototype does not draw ----------
+   Everything below follows the same rules: no literal colours, one accent-
+   filled button per screen, single-sided borders get radius 0, and never
+   opacity on text. */
+
+/* The drawer. Detail invoked rather than resident, so it sits on surface and
+   is separated from the buffer by a hairline rather than by a shadow. */
+/* The header is chrome and the content is read, so they are a step apart.
+   Two regions at one value with only a border between them means one of them
+   is at the wrong level. */
+.tf-drawer {
+  background-color: @tf_panel;
+  border-top: 1px solid @tf_hairline;
+}
+.tf-drawer-header {
+  background-color: @tf_surface;
+  padding: 4px 8px;
+  border-bottom: 1px solid @tf_hairline;
+}
+
+/* The drawer's tabs: a row of words, twenty-eight pixels, and the one in front
+   takes the body's own surface. */
+.tf-drawer-tab {
+  border-radius: 0;
+  min-height: 28px;
+  padding: 2px 8px;
+  color: @tf_ink_muted;
+  border-bottom: 2px solid transparent;
+}
+
+.tf-drawer-tab:hover { background-color: @tf_hover; }
+
+.tf-drawer-tab:checked {
+  background-color: @tf_panel;
+  border-bottom-color: @tf_accent_edge;
+  color: @tf_ink;
+  font-weight: 500;
+}
+
+/* How much a tab has to say. **Absent when it has nothing** — a count reading
+   nought is one people stop reading, and it takes the count that means
+   something down with it. */
+.tf-count {
+  font-size: 0.846em;
+  font-weight: 500;
+  color: @tf_ink_on_fill;
+  background-color: @tf_accent_fill;
+  border-radius: 999px;
+  padding: 0 4px;
+}
+
+/* The find row sits over the file it searches, so it takes the panel colour
+   rather than the surface: it belongs to the buffer, not to the chrome. */
+.tf-find {
+  background-color: @tf_panel;
+  border-bottom: 1px solid @tf_hairline;
+  padding: 6px 8px;
+}
+
+/* The palette is the one overlay that is not a menu. Two floating layers
+   maximum, and this is the second. */
+.tf-palette { background-color: @tf_overlay; }
+.tf-palette-heading {
+  font-size: 0.846em;
+  color: @tf_ink_faint;
+  padding: 6px 8px 2px;
+}
+.tf-palette row { padding: 4px 8px; border-radius: 5px; }
+.tf-palette row:selected {
+  background-color: @tf_accent_bg;
+  color: @tf_ink;
+}
+
+/* A gutter mark. Mono and medium so a single glyph reads at 11px. */
+.tf-mark { font-family: "JetBrains Mono", "IBM Plex Mono", "Source Code Pro", ui-monospace, monospace; font-weight: 500; }
+.tf-mark.tf-safe         { color: @tf_plan_create; }
+.tf-mark.tf-disruptive   { color: @tf_plan_update; }
+.tf-mark.tf-replace      { color: @tf_plan_replace; }
+/* A replace on a text line, not only in the gutter. It is neither a create nor
+   a destroy and it is the change people misread most, so it keeps its own
+   colour even though its consequence is irreversible. */
+.tf-replace              { color: @tf_plan_replace; }
+.tf-mark.tf-irreversible { color: @tf_plan_destroy; }
+.tf-mark.tf-noop         { color: @tf_plan_noop; }
+
+/* The change map: where the plan touches this file, beside the buffer. It
+   needs a ground of its own or an empty strip is indistinguishable from one
+   that is switched off. */
+.tf-change-map {
+  background-color: @tf_surface;
+  border-left: 1px solid @tf_hairline;
+}
+
+/* A status segment that reacts. Underlined because a number that is merely
+   clickable looks like a number. */
+.tf-clickable { text-decoration: underline; }
+.tf-clickable-host { padding: 0 4px; min-height: 0; background: transparent; border: none; }
+
+/* Text at each consequence level, for anything that is a line rather than a
+   card. The four names are the only ones there are. */
+.tf-safe         { color: @tf_consequence_safe_text; }
+.tf-disruptive   { color: @tf_consequence_disruptive_text; }
+.tf-irreversible { color: @tf_consequence_irreversible_text; }
+.tf-blocked      { color: @tf_blocked_text; }
+.tf-accent       { color: @tf_accent_text; }
+
+/* Line washes as text tags cannot be set from CSS, so the buffer reads these
+   through the theme instead. They are listed here so the four names live in
+   one place. */
+.tf-wash-safe         { background-color: @tf_consequence_safe_bg; }
+.tf-wash-disruptive   { background-color: @tf_consequence_disruptive_bg; }
+.tf-wash-irreversible { background-color: @tf_consequence_irreversible_bg; }
+.tf-wash-blocked      { background-color: @tf_blocked_bg; }
+
+/* The tab strip. Flat, twenty-eight pixels, one-pixel separators, and the
+   active tab takes the buffer's own surface — so the file in front reads as
+   the top of the page rather than as a pill floating above it. libadwaita
+   stretches tabs to fill the bar by default, which put two files at nearly
+   500px each and made a row of four unreadable. */
+tabbar {
+  background-color: @tf_surface;
+  border-bottom: 1px solid @tf_hairline;
+  padding: 0;
+  margin: 0;
+  min-height: 28px;
+}
+tabbar > * { min-height: 28px; padding: 0; margin: 0; }
+
+tabbar tabbox > tab {
+  min-width: 0;
+  /* 28px is the strip. The tab's own box is that minus its 4px of vertical
+     padding and the 2px accent edge it holds whether or not it is active. */
+  min-height: 22px;
+  margin: 0;
+  padding: 2px 8px;
+  font-size: 0.923em;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  /* The separator, drawn on the tab rather than between them, so the first
+     tab has none and nothing shifts when one is closed. */
+  border-left: 1px solid @tf_hairline;
+  /* Held whether or not this tab is the active one, so selecting a tab moves
+     nothing sideways. */
+  border-top: 2px solid transparent;
+}
+
+/* **28px is the row, and everything inside it has to agree.** The tab's own
+   min-height was already 28 and the strip measured 46: libadwaita gives the
+   bar padding, and the close button and the indicator carry Adwaita's own
+   button metrics, each of which is taller than the row it sits in. */
+tabbar tabbox { padding: 0; margin: 0; min-height: 0; }
+tabbar tabbox > tab { margin-top: 0; margin-bottom: 0; }
+tabbar tabbox > tab > * { min-height: 0; }
+/* libadwaita styles these by class, which out-specifies a type selector, so
+   the overrides have to name the classes too. */
+tabbar tabbox > tab button.tab-close-button,
+tabbar tabbox > tab button.tab-indicator {
+  min-height: 18px;
+  min-width: 18px;
+  padding: 0;
+  margin: 0;
+  border-radius: 5px;
+}
+tabbar tabbox > tab .tab-title { min-height: 0; }
+tabbar tabbox > tab image { min-height: 0; -gtk-icon-size: 14px; }
+
+tabbar tabbox > tab:first-child { border-left-color: transparent; }
+tabbar tabbox > tab:hover { background-color: @tf_hover; }
+
+tabbar tabbox > tab:checked {
+  background-color: @tf_panel;
+  border-top-color: @tf_accent_edge;
+  border-left-color: transparent;
+  font-weight: 500;
+  color: @tf_ink;
+}
+
+/* The new-tab button and the overflow chevron, after the last tab and on
+   their own. They were drawn inside the active tab, where a `+` reads as part
+   of the file's name rather than as a control. */
+.tf-tab-actions button {
+  border-radius: 0;
+  min-height: 28px;
+  min-width: 28px;
+  padding: 0;
+}
+.tf-tab-actions button:hover { background-color: @tf_hover; }
+
+/* ---------- diagnostics ---------- */
+
+/* A location is the one accent-coloured thing in a diagnostic: it is a link,
+   which is what accent marks. The severity is carried by the words. */
+button.tf-link {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  min-height: 0;
+  min-width: 0;
+  color: @tf_accent_text;
+  font-family: "JetBrains Mono", "IBM Plex Mono", "Source Code Pro", ui-monospace, monospace;
+  font-size: 0.923em;
+}
+
+button.tf-link:hover { text-decoration: underline; }
+button.tf-link:disabled { color: @tf_ink_faint; }
+
+.tf-fix-preview {
+  border: 1px solid @tf_hairline;
+  border-radius: 5px;
+  padding: 6px 8px;
+}
+
+/* The line washes colour the row and nothing else, so a preview reads as two
+   lines of code rather than as two coloured buttons. */
+.tf-fix-preview label { padding: 1px 2px; }
+
+/* ---------- empty states ---------- */
+
+/* Centred, quiet, and never a heading with nothing under it. Every one of
+   these was a left-aligned sentence at the top of a large empty rectangle,
+   which reads as a render that stopped half way. */
+.tf-empty {
+  padding: 24px 16px;
+  color: @tf_ink_muted;
+}
+
+.tf-empty-glyph {
+  font-size: 2.0em;
+  color: @tf_ink_ghost;
+}
+
+/* ---------- the console ---------- */
+
+/* A well the transcript sits in, so the record of what has been asked and the
+   thing you ask with are two surfaces rather than one. */
+.tf-sunken {
+  background-color: @tf_sunken;
+  border: 1px solid @tf_hairline;
+  border-radius: 5px;
+}
+
+/* **The quietest ink does not go in the well.** `ink_faint` clears 4.5:1 on
+   every raised surface and comes to 4.19:1 on `sunken`, and the answer is not
+   to lighten the well — past the value that fixes the text it stops being
+   distinguishable from the canvas at all, so the surface would be spent to
+   save the words on it. Inside a well, quiet is one step up. */
+.tf-sunken .tf-faint { color: @tf_ink_muted; }
+
+/* Pinned under the transcript, whatever height the transcript came to. */
+.tf-console-prompt {
+  padding-top: 2px;
+}
+
+/* ---------- a plan row ---------- */
+
+/* The whole row is the target. A plan is read to find the one thing worth
+   going to look at, and asking somebody to hit a link inside the row is asking
+   them to aim at what they have already found. */
+.tf-plan-row {
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+}
+.tf-plan-row:hover { background-color: @tf_hover; }

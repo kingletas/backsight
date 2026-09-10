@@ -1,0 +1,13 @@
+{
+  "description": "A public subnet, but the rule only admits one office range",
+  "partial": false,
+  "note": "",
+  "verified_by": null,
+  "expects": [
+    {
+      "resource": "aws_network_interface.db",
+      "exposed": false,
+      "why": "the subnet is public but the rule admits a single named range"
+    }
+  ]
+}

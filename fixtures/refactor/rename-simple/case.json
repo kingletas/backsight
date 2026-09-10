@@ -1,0 +1,11 @@
+{
+  "description": "A resource renamed, with the moved block that keeps its state",
+  "kind": "rename",
+  "expect": "no-op",
+  "moved": [
+    {
+      "from": "terraform_data.api",
+      "to": "terraform_data.api_gateway"
+    }
+  ]
+}

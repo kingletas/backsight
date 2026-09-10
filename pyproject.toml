@@ -1,0 +1,88 @@
+[project]
+name = "backsight"
+dynamic = ["version"]
+description = "A Terraform workbench that shows what a change will do while you write it"
+readme = "README.md"
+license = { file = "LICENSE" }
+authors = [{ name = "Luis Tineo", email = "code@kingletas.com" }]
+requires-python = ">=3.12"
+dependencies = [
+    "tomli-w>=1.2.0",
+    "tree-sitter>=0.26.0",
+    "tree-sitter-hcl>=1.2",
+]
+
+[project.scripts]
+backsight = "backsight.cli:main"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.6",
+    "pyyaml>=6.0.3",
+    # The integration suite checks the emulator through its own API. It was
+    # only ever found through the system's site-packages, so a clean runner
+    # could not even collect the tests.
+    "boto3>=1.43.89",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+# One literal, in the package. A second one here would be the version the
+# application prints disagreeing with the version the wheel carries.
+[tool.hatch.version]
+path = "src/backsight/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/backsight"]
+
+# The editor schemes are data the application loads at run time. They live
+# inside the package, so `packages` above already carries them into the wheel —
+# a force-include for them pointed at a path that never existed, and once
+# corrected added every file to the archive twice.
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "S"]
+# S101: pytest asserts are the house test style.
+ignore = ["S101"]
+
+[tool.ruff.lint.per-file-ignores]
+# E402: gi.require_version must run before the gi.repository imports it pins.
+"src/backsight/app/*" = ["E402"]
+"spikes/*" = ["E402", "S603", "S607"]
+# E402: gi.require_version has to run before the gi.repository imports it pins.
+"scripts/*" = ["E402", "S603", "S607"]
+# S603/S607: the architecture tests spawn python and tofu with fixed argument
+# lists and no shell, to prove things about this repository.
+"tests/*" = ["S603", "S607"]
+# S314: this test parses the editor schemes, which are files in this repository
+# rather than anything a user supplies. The application never parses them at
+# all — GtkSourceView loads them — so no untrusted XML reaches Python here.
+"tests/app/test_theme.py" = ["S314"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# `sandbox` needs a container runtime and a provider download, so one test takes
+# about as long as the rest of the suite together. `make check` leaves them out
+# and `make ci` runs them, which is where the wait belongs.
+markers = [
+    "sandbox: drives a real emulator container",
+    # Drives a real window on a private display, and some of them run the real
+    # engine. Slower than a unit test by an order of magnitude and worth every
+    # second: the unit suite was 1,856 tests green while the editor drew
+    # nothing at all.
+    "acceptance: drives the real window end to end",
+    # Drives the emulator in `infra-test/` through the application's own engine
+    # invocations. Needs Docker and the engine binary; skips with a sentence
+    # saying what to run when either is missing.
+    "integration: drives the emulator in infra-test/",
+    # Which fixture under `infra-test/terraform/` a case wants. `base` when a
+    # case says nothing.
+    "fixture_name: the infra-test fixture this case runs against",
+]

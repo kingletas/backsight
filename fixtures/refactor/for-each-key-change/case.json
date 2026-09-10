@@ -1,0 +1,11 @@
+{
+  "description": "A for_each key renamed, with the moved block for it",
+  "kind": "for-each-key",
+  "expect": "no-op",
+  "moved": [
+    {
+      "from": "terraform_data.n[\"old\"]",
+      "to": "terraform_data.n[\"new\"]"
+    }
+  ]
+}

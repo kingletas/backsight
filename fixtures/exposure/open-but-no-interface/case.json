@@ -1,0 +1,13 @@
+{
+  "description": "An open rule on a group nothing is attached to",
+  "partial": false,
+  "note": "",
+  "verified_by": null,
+  "expects": [
+    {
+      "resource": "aws_security_group.db",
+      "exposed": false,
+      "why": "nothing is attached to the group, so the rule reaches nothing"
+    }
+  ]
+}

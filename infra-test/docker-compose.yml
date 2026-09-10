@@ -1,0 +1,44 @@
+# The emulator the integration suite runs against. Disposable by construction:
+# nothing in it is persisted, and `scripts/down` takes the volume with it.
+#
+# **It does not share the one `dev-services` runs.** That stack has a MiniStack
+# of its own on 4566, it belongs to whoever started it, and a suite that resets
+# somebody else's emulator between tests is a suite that deletes their work.
+# This one has its own project name, its own container name and its own port.
+name: backsight-infra-test
+
+services:
+  ministack:
+    # Pinned. A test run that silently picks up a new emulator build is one
+    # whose result is about a different thing than the last one was.
+    image: ministackorg/ministack:${MINISTACK_VERSION:-1.5.8}
+    container_name: backsight-infra-test-ministack
+    ports:
+      # Loopback only, and not 4566. A developer machine may already be running
+      # something on the usual port, and taking it would be rude and confusing.
+      - "127.0.0.1:${MINISTACK_PORT:-14566}:4566"
+    environment:
+      # Only what the application's own fixtures exercise. Every extra service
+      # is start-up time bought for coverage nobody asked for.
+      SERVICES: "s3,sqs,dynamodb,sts,iam"
+      DEBUG: "${MINISTACK_DEBUG:-0}"
+      # In memory. There is nothing here worth keeping between runs, and a
+      # persisted emulator is one where a test passes because of the last one.
+      PERSISTENCE: "0"
+    healthcheck:
+      # The emulator's own answer about itself, rather than a port being open.
+      # A port opens before the services behind it are ready, and a suite that
+      # starts there fails somewhere much less obvious.
+      # Python is the one HTTP client the image carries; curl and wget are absent,
+      # so a check written with either can never pass however healthy the service is.
+      test:
+        - CMD
+        - python3
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://localhost:4566/_ministack/health', timeout=4).read()"
+      interval: 2s
+      timeout: 5s
+      retries: 45
+      start_period: 5s
+    tmpfs:
+      - /tmp

@@ -1,0 +1,6 @@
+{
+  "description": "A rename with no moved block: destroy and recreate",
+  "kind": "rename",
+  "expect": "destructive",
+  "moved": []
+}

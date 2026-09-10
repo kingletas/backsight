@@ -1,0 +1,19 @@
+{
+  "description": "count converted to for_each, index mapped to key",
+  "kind": "count-to-for-each",
+  "expect": "no-op",
+  "moved": [
+    {
+      "from": "terraform_data.n[0]",
+      "to": "terraform_data.n[\"a\"]"
+    },
+    {
+      "from": "terraform_data.n[1]",
+      "to": "terraform_data.n[\"b\"]"
+    },
+    {
+      "from": "terraform_data.n[2]",
+      "to": "terraform_data.n[\"c\"]"
+    }
+  ]
+}

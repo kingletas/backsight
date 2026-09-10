@@ -1,0 +1,13 @@
+{
+  "description": "The same open rule written as ::/0 rather than 0.0.0.0/0",
+  "partial": false,
+  "note": "",
+  "verified_by": null,
+  "expects": [
+    {
+      "resource": "aws_network_interface.db",
+      "exposed": true,
+      "why": "::/0 is the same door as 0.0.0.0/0 and is missed by rules that only match the v4 form"
+    }
+  ]
+}

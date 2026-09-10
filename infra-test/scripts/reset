@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#
+# Empties the emulator without restarting it, which is what belongs between
+# test cases — a restart costs several seconds and this costs one call.
+#
+# Usage:   infra-test/scripts/reset
+#
+# Environment overrides:
+#   MINISTACK_PORT   default 14566
+set -euo pipefail
+
+port="${MINISTACK_PORT:-14566}"
+curl -fsS -X POST "http://127.0.0.1:${port}/_ministack/reset" >/dev/null
+printf 'emulator reset\n'

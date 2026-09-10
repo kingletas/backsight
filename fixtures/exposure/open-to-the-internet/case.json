@@ -1,0 +1,13 @@
+{
+  "description": "A database port open to 0.0.0.0/0 on a subnet with a route to the gateway",
+  "partial": false,
+  "note": "",
+  "verified_by": null,
+  "expects": [
+    {
+      "resource": "aws_network_interface.db",
+      "exposed": true,
+      "why": "0.0.0.0/0 on tcp/5432 reaches it through a public subnet and the internet gateway"
+    }
+  ]
+}

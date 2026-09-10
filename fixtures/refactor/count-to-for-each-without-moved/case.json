@@ -1,0 +1,6 @@
+{
+  "description": "count to for_each with no index-to-key mapping",
+  "kind": "count-to-for-each",
+  "expect": "destructive",
+  "moved": []
+}

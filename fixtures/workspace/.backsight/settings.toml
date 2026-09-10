@@ -1,0 +1,7 @@
+# Backsight settings for this workspace.
+# Commit this file to share conventions across a team.
+# Anything set here wins over the user's own settings.
+
+[terraform]
+# binary = "tofu"
+# plan_on_save = true

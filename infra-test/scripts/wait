@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+#
+# Waits for the emulator to answer its own health endpoint, and says what it
+# found. A port opens before the services behind it are ready, so a suite that
+# starts at the port fails somewhere much less obvious.
+#
+# Usage:   infra-test/scripts/wait [--start]
+#
+#   --start  bring the stack up first, rather than only waiting on it
+#
+# Environment overrides:
+#   MINISTACK_PORT   default 14566
+#   WAIT_SECONDS     how long to give it (default 120)
+set -euo pipefail
+
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+port="${MINISTACK_PORT:-14566}"
+seconds="${WAIT_SECONDS:-120}"
+health="http://127.0.0.1:${port}/_ministack/health"
+
+if [[ "${1:-}" == "--start" ]]; then
+  docker compose -f "${here}/docker-compose.yml" up -d
+fi
+
+printf 'waiting for the emulator on %s\n' "$port"
+for _ in $(seq 1 "$seconds"); do
+  if curl -fsS "$health" >/dev/null 2>&1; then
+    services="$(curl -fsS "$health" | python3 -c '
+import json, sys
+said = json.load(sys.stdin)
+ready = sorted(n for n, s in said["services"].items() if s == "available")
+version, edition = said["version"], said["edition"]
+print("%s (%s) - %d service(s): %s" % (version, edition, len(ready), ", ".join(ready)))
+')"
+    printf 'ready: %s\n' "$services"
+    exit 0
+  fi
+  sleep 1
+done
+
+printf 'the emulator did not answer %s within %ss\n' "$health" "$seconds" >&2
+printf 'its logs follow:\n' >&2
+docker compose -f "${here}/docker-compose.yml" logs --tail 80 >&2
+exit 1

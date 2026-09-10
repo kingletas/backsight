@@ -1,0 +1,11 @@
+{
+  "description": "A rename whose references live in another file",
+  "kind": "rename",
+  "expect": "no-op",
+  "moved": [
+    {
+      "from": "terraform_data.api",
+      "to": "terraform_data.api_gateway"
+    }
+  ]
+}

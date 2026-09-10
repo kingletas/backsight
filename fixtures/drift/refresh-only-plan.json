@@ -1,0 +1,74 @@
+{
+  "format_version": "1.2",
+  "terraform_version": "1.12.6",
+  "resource_drift": [
+    {
+      "address": "local_file.config",
+      "mode": "managed",
+      "type": "local_file",
+      "name": "config",
+      "provider_name": "registry.opentofu.org/opentofu/local",
+      "change": {
+        "actions": [
+          "delete"
+        ],
+        "before": {
+          "content": "mode = production\n",
+          "content_base64": null,
+          "content_base64sha256": "m013wy4J/weemmpwVq4oUNqLW9sB8g56ROY/wHhpl+0=",
+          "content_base64sha512": "NpY1nC8VRe89nRO7zTnJT5eRflYvD74UtIXEpRVA8igmhriQ7h0DonytHX2mhGhCWsq6zHeKcxyTtAzrXzgMlw==",
+          "content_md5": "6393acf23518641fd92508ba84002836",
+          "content_sha1": "3f0b6f78533af90de500b414711aced2aa374059",
+          "content_sha256": "9b4d77c32e09ff079e9a6a7056ae2850da8b5bdb01f20e7a44e63fc0786997ed",
+          "content_sha512": "3696359c2f1545ef3d9d13bbcd39c94f97917e562f0fbe14b485c4a51540f2282686b890ee1d03a27cad1d7da68468425acabacc778a731c93b40ceb5f380c97",
+          "directory_permission": "0777",
+          "file_permission": "0777",
+          "filename": "./generated/app.conf",
+          "id": "3f0b6f78533af90de500b414711aced2aa374059",
+          "sensitive_content": null,
+          "source": null
+        },
+        "after": null,
+        "after_unknown": {},
+        "before_sensitive": {
+          "sensitive_content": true
+        },
+        "after_sensitive": false
+      }
+    },
+    {
+      "address": "local_file.notes",
+      "mode": "managed",
+      "type": "local_file",
+      "name": "notes",
+      "provider_name": "registry.opentofu.org/opentofu/local",
+      "change": {
+        "actions": [
+          "delete"
+        ],
+        "before": {
+          "content": "left alone\n",
+          "content_base64": null,
+          "content_base64sha256": "BAF3JHYqfKTVzSiqHIHwVVQFj3Mzd80jxZqy1Q/cCZU=",
+          "content_base64sha512": "cVWsB8I+bfq888T+GkUtB6CJig00RGb2SKWpwZdn1A6uJkWXDdBoSeJW41lKqYw4LPDnxLdlZyr2UumLxkGQ1g==",
+          "content_md5": "35d967f853f4046f513acbad1547bf58",
+          "content_sha1": "d5869aa776554c88732dad9d3fff7fbb4a317398",
+          "content_sha256": "04017724762a7ca4d5cd28aa1c81f05554058f733377cd23c59ab2d50fdc0995",
+          "content_sha512": "7155ac07c23e6dfabcf3c4fe1a452d07a0898a0d344466f648a5a9c19767d40eae2645970dd06849e256e3594aa98c382cf0e7c4b765672af652e98bc64190d6",
+          "directory_permission": "0777",
+          "file_permission": "0777",
+          "filename": "./generated/notes.txt",
+          "id": "d5869aa776554c88732dad9d3fff7fbb4a317398",
+          "sensitive_content": null,
+          "source": null
+        },
+        "after": null,
+        "after_unknown": {},
+        "before_sensitive": {
+          "sensitive_content": true
+        },
+        "after_sensitive": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "description": "Resources lifted into a module with no moved blocks",
+  "kind": "extract",
+  "expect": "destructive",
+  "moved": []
+}

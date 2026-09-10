@@ -1,0 +1,6 @@
+{
+  "description": "A moved block whose source was never in state",
+  "kind": "rename",
+  "expect": "destructive",
+  "moved": []
+}

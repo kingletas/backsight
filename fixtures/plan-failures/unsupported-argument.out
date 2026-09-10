@@ -1,0 +1,7 @@
+
+Error: Unsupported argument
+
+  on main.tf line 2, in resource "terraform_data" "a":
+   2:   nonsense = "yes"
+
+An argument named "nonsense" is not expected here.

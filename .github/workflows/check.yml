@@ -1,0 +1,112 @@
+# What a commit has to pass, run somewhere other than the machine that wrote it.
+#
+# Actions are pinned to a commit SHA, because a tag can be moved by whoever owns
+# the action. `tests/architecture/test_ci_matches_make.py` fails if one is not.
+
+name: check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Read-only. Nothing here writes to the repository or needs more than a checkout.
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: lint and tests
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          enable-cache: true
+
+      # The engine is toolkit-free by design, but the app layer and the window
+      # smoke need the real bindings, and a wheel cannot supply them. Xvfb is
+      # where the windows go: the suite refuses to open any on a display it
+      # did not start.
+      - name: Install the GTK stack
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            python3-gi gir1.2-gtk-4.0 gir1.2-adw-1 gir1.2-gtksource-5 xvfb
+
+      # Without this the plan tests skip rather than fail, and a gate that goes
+      # quiet when a dependency is missing is worse than one that goes red.
+      - name: Install OpenTofu
+        uses: opentofu/setup-opentofu@592200bd4b9bbf4772ace78f887668b1aee8f716 # v1.0.5
+        with:
+          tofu_version: 1.12.6
+          # The wrapper captures the engine's output for later steps, and the
+          # application reads that output itself — through the wrapper a file
+          # needing formatting came back as already tidy.
+          tofu_wrapper: false
+
+      - name: Run the gate
+        run: make check
+
+  integration:
+    name: every engine command, against the emulator
+    runs-on: ubuntu-24.04
+    # No cloud credentials, and none of these steps can reach an account: the
+    # provider is redirected at a container on loopback.
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          enable-cache: true
+
+      # The suite's root conftest opens a private X server before anything
+      # else, so even a run that touches no window needs one to start.
+      - name: Install Xvfb
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends xvfb
+
+      # Pinned, like the emulator and the provider. A run that silently picks up
+      # a new engine is a run whose result is about a different thing than the
+      # last one was.
+      - name: Install OpenTofu
+        uses: opentofu/setup-opentofu@592200bd4b9bbf4772ace78f887668b1aee8f716 # v1.0.5
+        with:
+          tofu_version: 1.12.6
+          # The wrapper captures the engine's output for later steps, and the
+          # application reads that output itself — through the wrapper a file
+          # needing formatting came back as already tidy.
+          tofu_wrapper: false
+
+      # One download for the whole job, so `init` in each isolated copy reuses
+      # it. Without this the suite spends almost all of its time fetching the
+      # same provider.
+      - name: Cache the provider
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: .plugin-cache
+          key: tofu-plugins-${{ hashFiles('infra-test/terraform/*/main.tf') }}
+
+      # `scripts/test` starts the emulator, waits for it, runs the suite, prints
+      # the container logs if anything failed, and takes the stack down on every
+      # ending — including a cancelled job.
+      - name: Run every engine command against the emulator
+        run: make integration
+        env:
+          TF_PLUGIN_CACHE_DIR: .plugin-cache
+
+      # Belt and braces: the script cleans up on its own, and a runner killed
+      # between steps would not have run it.
+      - name: Take the emulator down
+        if: always()
+        run: infra-test/scripts/down

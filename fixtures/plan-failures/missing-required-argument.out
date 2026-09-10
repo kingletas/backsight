@@ -1,0 +1,7 @@
+
+Error: Missing required argument
+
+  on main.tf line 1, in output "name":
+   1: output "name" {
+
+The argument "value" is required, but no definition was found.

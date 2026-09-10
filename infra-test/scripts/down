@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#
+# Stops the integration emulator and removes everything it left behind.
+#
+# Usage:   infra-test/scripts/down [-v]
+#
+#   -v   also remove the volumes. There is nothing worth keeping in them, so
+#        this is the default; the flag is here because the habit is worth having.
+#
+# Safe to run when nothing is up. **It only ever touches this project's own
+# stack** — `dev-services` runs an emulator of its own and it is not ours.
+set -euo pipefail
+
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+docker compose -f "${here}/docker-compose.yml" down --volumes --remove-orphans
