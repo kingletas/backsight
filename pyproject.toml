@@ -18,12 +18,12 @@ backsight = "backsight.cli:main"
 [dependency-groups]
 dev = [
     "pytest>=9.1.1",
-    "ruff>=0.16.6",
+    "ruff>=0.16.9",
     "pyyaml>=6.0.3",
     # The integration suite checks the emulator through its own API. It was
     # only ever found through the system's site-packages, so a clean runner
     # could not even collect the tests.
-    "boto3>=1.43.89",
+    "boto3>=1.43.103",
 ]
 
 [build-system]
